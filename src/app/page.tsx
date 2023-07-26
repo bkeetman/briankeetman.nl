@@ -10,7 +10,7 @@ export default function Home() {
           <p>
             <b>briankeetman.nl</b>
           </p>
-          <p>Zuidwesterringweg 34A</p>
+          <p>Zuidwesterringweg 34a</p>
           <p>8309 PH Tollebeek</p>
           <p>info@briankeetman.nl</p>
         </div>
