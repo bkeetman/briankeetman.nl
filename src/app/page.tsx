@@ -3,9 +3,9 @@ import Logo from '../../public/logo-briankeetman-nl.svg';
 
 export default function Home() {
   return (
-    <main className="flex min-h-screen">
-      {/* Left half */}
-      <div className="w-1/2 p-8 flex flex-col items-center justify-center">
+    <main className="flex flex-col md:flex-row min-h-screen">
+      {/* Text section - full width on mobile, half on desktop */}
+      <div className="w-full md:w-1/2 p-8 flex flex-col items-center justify-center min-h-[50vh] md:min-h-screen">
         {/* Logo centered */}
         <div className="mb-12">
           <Image alt="Logo" src={Logo} width={200} height={200} />
@@ -33,8 +33,8 @@ export default function Home() {
         </div>
       </div>
 
-      {/* Right half - full image */}
-      <div className="w-1/2 relative">
+      {/* Image section - full width on mobile, half on desktop */}
+      <div className="w-full md:w-1/2 relative min-h-[50vh] md:min-h-screen">
         <Image
           src="/background.webp"
           alt="Brian met robot"
