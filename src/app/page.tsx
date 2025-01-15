@@ -40,7 +40,10 @@ export default function Home() {
           alt="Brian met robot"
           fill
           className="object-cover"
+          sizes="(max-width: 768px) 100vw, 50vw"
           priority
+          quality={90}
+          loading="eager"
         />
       </div>
     </main>
