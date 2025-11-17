@@ -53,3 +53,4 @@ This project is deployed on [Vercel](https://vercel.com). The repository is conn
 ## License
 
 Private project - All rights reserved.
+
