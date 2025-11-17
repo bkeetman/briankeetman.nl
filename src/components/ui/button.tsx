@@ -9,10 +9,13 @@ export interface ButtonProps
 }
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className = '', variant = 'default', asChild, children, ...props }, ref) => {
+  (
+    { className = '', variant = 'default', asChild, children, ...props },
+    ref
+  ) => {
     const baseStyles =
       'inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50';
-    
+
     const variantStyles = {
       default: 'bg-brand-pink text-brand-dark hover:bg-pink-500',
       ghost: 'hover:bg-white/5',
@@ -22,9 +25,11 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
 
     if (asChild && React.isValidElement(children)) {
       return React.cloneElement(children, {
-        className: `${combinedClassName} ${children.props.className || ''}`,
         ...props,
-      });
+        className: `${combinedClassName} ${
+          (children.props as { className?: string }).className || ''
+        }`,
+      } as React.HTMLAttributes<HTMLElement>);
     }
 
     return (
@@ -39,4 +44,3 @@ Button.displayName = 'Button';
 
 export { Button };
 export default Button;
-
