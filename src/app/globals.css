@@ -1,29 +1,6 @@
-@import 'tailwindcss';
-
-@theme {
-  /* Brand colors - Tailwind v4 uses this format for nested colors */
-  --color-brand-pink: #d5147b;
-  --color-brand-dark: #1a1919;
-  --color-brand-dark-light: #2a2a2a;
-  --color-brand-light: #fdf2ff;
-
-  /* Font families */
-  --font-family-display: 'Bebas Neue', system-ui, sans-serif;
-  --font-family-sans: 'Inter', system-ui, sans-serif;
-
-  /* Letter spacing */
-  --letter-spacing-tightest: -0.06em;
-}
-
-/* Ensure brand colors work with nested syntax by defining them explicitly */
-@layer theme {
-  :root {
-    --color-brand-pink: #d5147b;
-    --color-brand-dark: #1a1919;
-    --color-brand-dark-light: #2a2a2a;
-    --color-brand-light: #fdf2ff;
-  }
-}
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 :root {
   --font-inter: var(--font-inter);
