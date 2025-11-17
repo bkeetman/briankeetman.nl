@@ -1,27 +1,31 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss';
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+@theme {
+  /* Brand colors - Tailwind v4 uses this format for nested colors */
+  --color-brand-pink: #d5147b;
+  --color-brand-dark: #1a1919;
+  --color-brand-dark-light: #2a2a2a;
+  --color-brand-light: #fdf2ff;
+
+  /* Font families */
+  --font-family-display: 'Bebas Neue', system-ui, sans-serif;
+  --font-family-sans: 'Inter', system-ui, sans-serif;
+
+  /* Letter spacing */
+  --letter-spacing-tightest: -0.06em;
 }
 
-@media (prefers-color-scheme: dark) {
+/* Ensure brand colors work with nested syntax by defining them explicitly */
+@layer theme {
   :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
+    --color-brand-pink: #d5147b;
+    --color-brand-dark: #1a1919;
+    --color-brand-dark-light: #2a2a2a;
+    --color-brand-light: #fdf2ff;
   }
 }
 
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to top,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+:root {
+  --font-inter: var(--font-inter);
+  --font-bebas-neue: var(--font-bebas-neue);
 }
