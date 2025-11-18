@@ -76,9 +76,9 @@ export default async function BlogPost({ params }: PageProps) {
           variant="ghost"
           className="text-gray-400 hover:text-white"
         >
-          <Link href="/" className="flex items-center gap-2">
+          <Link href="/blog" className="flex items-center gap-2">
             <ArrowLeft className="h-4 w-4" />
-            <span>Terug</span>
+            <span>Terug naar overzicht</span>
           </Link>
         </Button>
       </div>
@@ -136,9 +136,9 @@ export default async function BlogPost({ params }: PageProps) {
                   variant="ghost"
                   className="text-gray-400 hover:text-white -ml-2"
                 >
-                  <Link href="/" className="flex items-center gap-2">
+                  <Link href="/blog" className="flex items-center gap-2">
                     <ArrowLeft className="h-4 w-4" />
-                    <span>Terug naar home</span>
+                    <span>Terug naar overzicht</span>
                   </Link>
                 </Button>
               </div>
