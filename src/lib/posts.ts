@@ -2,9 +2,9 @@ import { format } from 'date-fns';
 import { nl } from 'date-fns/locale/nl';
 import fs from 'fs';
 import matter from 'gray-matter';
+import { compileMDX } from 'next-mdx-remote/rsc';
 import path from 'path';
-import { remark } from 'remark';
-import html from 'remark-html';
+import type { ReactElement } from 'react';
 
 export interface Post {
   slug: string;
@@ -13,10 +13,10 @@ export interface Post {
   description: string;
   image?: string;
   content: string;
-  htmlContent: string;
+  mdxContent: ReactElement;
 }
 
-const postsDirectory = path.join(process.cwd(), 'posts');
+const postsDirectory = path.join(process.cwd(), 'pages');
 
 export function getPostSlugs(): string[] {
   if (!fs.existsSync(postsDirectory)) {
@@ -25,12 +25,12 @@ export function getPostSlugs(): string[] {
 
   const fileNames = fs.readdirSync(postsDirectory);
   return fileNames
-    .filter((name) => name.endsWith('.md'))
-    .map((name) => name.replace(/\.md$/, ''));
+    .filter((name) => name.endsWith('.mdx'))
+    .map((name) => name.replace(/\.mdx$/, ''));
 }
 
 export async function getPostBySlug(slug: string): Promise<Post | null> {
-  const fullPath = path.join(postsDirectory, `${slug}.md`);
+  const fullPath = path.join(postsDirectory, `${slug}.mdx`);
 
   if (!fs.existsSync(fullPath)) {
     return null;
@@ -39,8 +39,9 @@ export async function getPostBySlug(slug: string): Promise<Post | null> {
   const fileContents = fs.readFileSync(fullPath, 'utf8');
   const { data, content } = matter(fileContents);
 
-  const processedContent = await remark().use(html).process(content);
-  const htmlContent = processedContent.toString();
+  const { content: mdxContent } = await compileMDX({
+    source: content,
+  });
 
   return {
     slug,
@@ -49,7 +50,7 @@ export async function getPostBySlug(slug: string): Promise<Post | null> {
     description: data.description || '',
     image: data.image || undefined,
     content,
-    htmlContent,
+    mdxContent,
   };
 }
 

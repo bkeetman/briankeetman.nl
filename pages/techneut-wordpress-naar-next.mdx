@@ -1,0 +1,35 @@
+---
+title: 'Waarom ik blogs in MDX schrijf'
+description: 'Een korte walkthrough van hoe ik nieuwe artikelen publiceer in mijn eigen huisstijl.'
+date: '2025-01-05'
+image: '/background.webp'
+---
+
+# MDX met mijn huisstijl
+
+Ik schrijf mijn artikelen voortaan als **MDX** bestanden, zodat ik componenten en interactieve elementen kan mengen met gewone tekst. Het enige wat ik hoef te doen is een nieuw `.mdx` bestand in de map `/pages` plaatsen en het juiste *frontmatter* toevoegen.
+
+## Frontmatter invullen
+
+```yaml
+---
+title: 'Mijn titel'
+description: 'Een korte samenvatting'
+date: '2025-01-05'
+image: '/background.webp'
+---
+```
+
+De `date` moet in ISO formaat staan (YYYY-MM-DD). De afbeelding is optioneel; zonder afbeelding krijg ik automatisch de achtergrond uit mijn huisstijl.
+
+## Binnen de content
+
+- Ik kan markdown gebruiken zoals ik gewend ben.
+- Inline code zoals `const foo = 'bar'` blijft netjes gestyled.
+- Ik kan waar nodig HTML of React componenten invoegen.
+
+> Tip: schrijf in korte paragrafen. Dat leest beter op mobiel.
+
+## Klaar? publiceer!
+
+Zodra het bestand is opgeslagen, wordt het automatisch opgepikt door `/blog/[slug]`. De slug is gelijk aan de bestandsnaam, dus dit artikel staat op `/blog/techneut-wordpress-naar-next`.

@@ -187,8 +187,9 @@ export default async function BlogPost({ params }: PageProps) {
                     prose-table:text-gray-200 prose-table:my-10
                     prose-th:text-white prose-th:border-white/10 prose-th:font-semibold
                     prose-td:border-white/10 prose-td:py-3"
-                  dangerouslySetInnerHTML={{ __html: post.htmlContent }}
-                />
+                >
+                  {post.mdxContent}
+                </div>
               </article>
             </div>
           </div>
