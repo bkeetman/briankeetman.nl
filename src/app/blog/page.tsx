@@ -81,7 +81,7 @@ export default async function BlogIndex() {
                     <code className="rounded bg-gray-900 px-2 py-1 text-sm text-white">
                       .mdx
                     </code>{' '}
-                    bestand in <span className="font-semibold">/pages</span>{' '}
+                    bestand in <span className="font-semibold">/posts</span>{' '}
                     plaatst, verschijnt het hier.
                   </p>
                 </div>

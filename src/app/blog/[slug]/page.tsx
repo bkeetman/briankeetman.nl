@@ -146,7 +146,7 @@ export default async function BlogPost({ params }: PageProps) {
               <article>
                 {/* Header */}
                 <header className="mb-16 lg:mb-20">
-                  <h1 className="font-display text-4xl sm:text-5xl lg:text-6xl xl:text-7xl tracking-tightest text-brand-pink mb-8 leading-[1.1] uppercase">
+                  <h1 className="font-display text-4xl sm:text-5xl lg:text-6xl xl:text-7xl tracking-blog text-brand-pink mb-8 leading-[1.1] uppercase">
                     {post.title}
                   </h1>
                   <div className="flex items-center gap-4 mb-8">
@@ -168,8 +168,8 @@ export default async function BlogPost({ params }: PageProps) {
                 <div
                   className="prose prose-invert prose-lg sm:prose-xl lg:prose-2xl max-w-none
                     prose-headings:font-bold prose-headings:tracking-tight
-                    prose-h1:text-4xl prose-h1:mt-16 prose-h1:mb-8 prose-h1:leading-tight prose-h1:text-white prose-h1:font-display prose-h1:uppercase prose-h1:tracking-tightest prose-h1:text-brand-pink
-                    prose-h2:text-3xl prose-h2:mt-14 prose-h2:mb-6 prose-h2:leading-tight prose-h2:text-brand-pink prose-h2:font-display prose-h2:uppercase prose-h2:tracking-tight
+                    prose-h1:text-4xl prose-h1:mt-16 prose-h1:mb-8 prose-h1:leading-tight prose-h1:text-white prose-h1:font-display prose-h1:uppercase prose-h1:tracking-blog prose-h1:text-brand-pink
+                    prose-h2:text-3xl prose-h2:mt-14 prose-h2:mb-6 prose-h2:leading-tight prose-h2:text-brand-pink prose-h2:font-display prose-h2:uppercase prose-h2:tracking-blog
                     prose-h3:text-2xl prose-h3:mt-12 prose-h3:mb-5 prose-h3:leading-tight prose-h3:text-brand-pink prose-h3:font-sans prose-h3:font-semibold
                     prose-h4:text-xl prose-h4:mt-10 prose-h4:mb-4 prose-h4:text-gray-100 prose-h4:font-sans prose-h4:font-semibold
                     prose-p:text-gray-200 prose-p:text-base prose-p:leading-relaxed prose-p:my-6

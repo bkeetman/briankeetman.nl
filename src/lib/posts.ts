@@ -16,7 +16,7 @@ export interface Post {
   mdxContent: ReactElement;
 }
 
-const postsDirectory = path.join(process.cwd(), 'pages');
+const postsDirectory = path.join(process.cwd(), 'posts');
 
 export function getPostSlugs(): string[] {
   if (!fs.existsSync(postsDirectory)) {
