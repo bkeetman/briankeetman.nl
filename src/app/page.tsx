@@ -41,7 +41,7 @@ export default function Home() {
       {/* Image section - full width on mobile, half on desktop */}
       <div className="w-full md:w-1/2 relative min-h-[50vh] md:min-h-screen">
         <Image
-          src="/background.webp"
+          src="/background-ufo.webp"
           alt="Brian met robot"
           fill
           className="object-cover"
