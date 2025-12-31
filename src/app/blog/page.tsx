@@ -1,7 +1,9 @@
 import { stegaClean } from '@sanity/client/stega';
+import { draftMode } from 'next/headers';
 import Image from 'next/image';
 import Link from 'next/link';
 
+import { VisualEditingClient } from '@/components/visual-editing-client';
 import { formatPostDate } from '@/lib/date';
 import { getPosts } from '@/sanity/lib/content';
 import { urlFor } from '@/sanity/lib/image';
@@ -32,6 +34,7 @@ export const metadata = {
 
 export default async function BlogIndex() {
   const posts = await getPosts();
+  const { isEnabled } = await draftMode();
 
   return (
     <div className="min-h-screen bg-brand-dark-light">
@@ -164,6 +167,7 @@ export default async function BlogIndex() {
           </div>
         </div>
       </div>
+        {isEnabled ? <VisualEditingClient /> : null}
     </div>
   );
 }
