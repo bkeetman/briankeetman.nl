@@ -37,7 +37,7 @@ export default async function BlogIndex() {
   const { isEnabled } = await draftMode();
 
   return (
-    <div className="min-h-screen bg-brand-dark-light">
+    <div className="min-h-screen bk-bg-gradient">
       <div className="flex flex-col lg:flex-row min-h-screen">
         {/* Hero */}
         <div className="relative w-full lg:w-1/2 h-[40vh] lg:h-screen flex-shrink-0">
@@ -62,9 +62,7 @@ export default async function BlogIndex() {
               <p className="text-xs uppercase tracking-[0.4em] text-white/70 mb-4">
                 Blog
               </p>
-              <h1 className="font-display text-4xl sm:text-5xl lg:text-6xl xl:text-7xl tracking-tightest text-brand-pink uppercase leading-[1.05]">
-                Lesjes uit de werkplaats
-              </h1>
+              <h1 className="bk-heading-hero leading-[1.05]">Lesjes uit de werkplaats</h1>
               <p className="mt-6 max-w-lg text-base sm:text-lg text-gray-200 leading-relaxed">
                 Tech, product en ondernemerschap. Geen fluff, wél praktijk. Dit
                 is waar ik opschrijf hoe ik dingen bouw, automatiseer en
@@ -75,7 +73,7 @@ export default async function BlogIndex() {
         </div>
 
         {/* List */}
-        <div className="w-full lg:w-1/2 bg-brand-dark-light flex-shrink-0 overflow-y-auto">
+        <div className="w-full lg:w-1/2 bg-transparent flex-shrink-0 overflow-y-auto">
           <div className="px-6 sm:px-8 lg:px-20 xl:px-24 py-12 sm:py-16 lg:py-20 xl:py-24">
             <div className="max-w-2xl mx-auto space-y-10">
               {posts.length === 0 ? (
@@ -111,9 +109,9 @@ export default async function BlogIndex() {
                           </span>
                         </div>
                         <div>
-                          <h2 className="font-display text-3xl sm:text-4xl tracking-tight text-white uppercase mb-4 leading-[1.05] group-hover:text-brand-pink transition-colors">
-                            <Link href={`/blog/${slug}`}>{post.title}</Link>
-                          </h2>
+                        <h2 className="bk-heading-sub text-3xl sm:text-4xl mb-4 leading-[1.05] group-hover:text-brand-pink transition-colors">
+                          <Link href={`/blog/${slug}`}>{post.title}</Link>
+                        </h2>
                           {post.description && (
                             <p className="text-gray-300 text-base leading-relaxed">
                               {post.description}

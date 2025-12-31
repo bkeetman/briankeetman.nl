@@ -28,7 +28,7 @@ export default function RootLayout({
   return (
     <html suppressHydrationWarning={true} lang="nl" className="dark">
       <body
-        className={`${inter.variable} ${bebasNeue.variable} font-sans min-h-screen bg-brand-dark-light text-white`}
+        className={`${inter.variable} ${bebasNeue.variable} font-sans min-h-screen text-white bk-bg-gradient`}
       >
         {children}
       </body>

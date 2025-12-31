@@ -6,3 +6,44 @@
   --font-inter: var(--font-inter);
   --font-bebas-neue: var(--font-bebas-neue);
 }
+
+@layer components {
+  .bk-heading-hero {
+    @apply font-display text-brand-pink uppercase tracking-hero leading-[1.05] text-4xl sm:text-5xl lg:text-6xl xl:text-7xl;
+  }
+
+  .bk-heading-sub {
+    @apply font-display uppercase tracking-hero text-white leading-[1.05] text-2xl md:text-3xl;
+  }
+
+  /* Semantic defaults for content */
+  h1 {
+    @apply bk-heading-hero;
+  }
+
+  h2 {
+    @apply font-display uppercase tracking-hero text-brand-pink leading-[1.08] text-3xl md:text-4xl;
+  }
+
+  h3 {
+    @apply font-sans font-semibold text-brand-pink text-2xl leading-tight;
+  }
+
+  h4 {
+    @apply font-sans font-semibold text-gray-100 text-xl leading-tight;
+  }
+}
+
+@layer utilities {
+  .bk-bg-gradient {
+    background-color: #2a2a2a;
+    background-image:
+      radial-gradient(circle at 20% 20%, rgba(213, 20, 123, 0.12), transparent 30%),
+      radial-gradient(circle at 80% 10%, rgba(116, 47, 255, 0.12), transparent 28%),
+      radial-gradient(circle at 50% 80%, rgba(18, 168, 168, 0.12), transparent 26%);
+  }
+
+  .tracking-hero {
+    letter-spacing: 0.08em;
+  }
+}

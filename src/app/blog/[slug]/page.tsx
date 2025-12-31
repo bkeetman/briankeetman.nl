@@ -80,7 +80,7 @@ export default async function BlogPost({ params }: PageProps) {
   const heroLqip = post.mainImage?.asset?.metadata?.lqip;
 
   return (
-    <div className="min-h-screen bg-brand-dark-light">
+    <div className="min-h-screen bk-bg-gradient">
       {/* Mobile: Back button */}
       <div className="lg:hidden px-4 pt-6 pb-4">
         <Button
@@ -137,7 +137,7 @@ export default async function BlogPost({ params }: PageProps) {
         </div>
 
         {/* Rechter helft: Content */}
-        <div className="w-full lg:w-1/2 bg-brand-dark-light flex-shrink-0 overflow-y-auto">
+        <div className="w-full lg:w-1/2 bg-transparent flex-shrink-0 overflow-y-auto">
           <div className="px-6 sm:px-8 lg:px-20 xl:px-24 py-12 sm:py-16 lg:py-20 xl:py-24">
             <div className="max-w-2xl mx-auto">
               {/* Desktop: Back button */}
@@ -157,7 +157,7 @@ export default async function BlogPost({ params }: PageProps) {
               <article>
                 {/* Header */}
                 <header className="mb-16 lg:mb-20">
-                  <h1 className="font-display text-4xl sm:text-5xl lg:text-6xl xl:text-7xl tracking-blog text-brand-pink mb-8 leading-[1.1] uppercase">
+                  <h1 className="bk-heading-hero tracking-blog mb-8 leading-[1.1]">
                     {post.title}
                   </h1>
                   <div className="flex items-center gap-4 mb-8">
@@ -187,8 +187,8 @@ export default async function BlogPost({ params }: PageProps) {
                     prose-a:text-brand-pink prose-a:no-underline hover:prose-a:underline prose-a:font-medium prose-a:transition-all
                     prose-strong:text-white prose-strong:font-semibold
                     prose-code:text-white prose-code:bg-gray-900 prose-code:px-2 prose-code:py-1 prose-code:rounded-md prose-code:text-base prose-code:font-mono prose-code:border prose-code:border-white/10
-                    prose-pre:bg-gray-900 prose-pre:border prose-pre:border-brand-pink/30 prose-pre:rounded-xl prose-pre:p-6 lg:prose-pre:p-8 prose-pre:my-10 prose-pre:overflow-x-auto
-                    prose-pre-code:bg-transparent prose-pre-code:p-0 prose-pre-code:border-0 prose-pre-code:text-base
+                    prose-pre:bg-transparent prose-pre:border-0 prose-pre:p-0 prose-pre:my-8 prose-pre:overflow-visible
+                    prose-pre-code:bg-transparent prose-pre-code:p-0 prose-pre-code:border-0 prose-pre-code:text-base prose-pre-code:leading-[1.5]
                     prose-blockquote:text-gray-400 prose-blockquote:border-brand-pink prose-blockquote:border-l-4 prose-blockquote:pl-8 prose-blockquote:pr-4 prose-blockquote:my-10 prose-blockquote:italic prose-blockquote:text-base prose-blockquote:leading-relaxed
                     prose-ul:text-gray-200 prose-ul:my-6 prose-ul:space-y-2 prose-ul:pl-6
                     prose-ol:text-gray-200 prose-ol:my-6 prose-ol:space-y-2 prose-ol:pl-6

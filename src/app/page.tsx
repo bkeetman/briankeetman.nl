@@ -18,7 +18,7 @@ function LinkedInIcon(props: SVGProps<SVGSVGElement>) {
 
 export default function Home() {
   return (
-    <main className="flex flex-col md:flex-row min-h-screen bg-brand-dark-light">
+    <main className="flex flex-col md:flex-row min-h-screen bk-bg-gradient">
       {/* Text section - full width on mobile, half on desktop */}
       <div className="w-full md:w-1/2 p-8 flex flex-col items-center justify-center min-h-[50vh] md:min-h-screen">
         {/* Logo centered */}
@@ -28,10 +28,10 @@ export default function Home() {
 
         {/* Text content */}
         <div className="text-gray-200 w-full max-w-md text-center">
-          <h1 className="mb-4 font-display text-4xl md:text-5xl tracking-tightest text-brand-pink uppercase">
+          <h1 className="mb-4 bk-heading-hero tracking-[0.02em]">
             Brian Keetman.nl
           </h1>
-          <h2 className="mb-8 font-display text-2xl md:text-3xl tracking-tight text-white uppercase">
+          <h2 className="mb-8 bk-heading-sub">
             Full-stack developer & builder
           </h2>
 

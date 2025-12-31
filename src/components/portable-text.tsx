@@ -48,11 +48,43 @@ const components: PortableTextComponents = {
         />
       );
     },
-    code: ({ value }) => (
-      <pre className="overflow-x-auto rounded-xl border border-brand-pink/30 bg-gray-900 px-6 py-4 text-sm leading-relaxed">
-        <code>{(value as { code?: string })?.code}</code>
-      </pre>
-    ),
+    code: ({ value }) => {
+      const code = (value as { code?: string; language?: string })?.code ?? '';
+      const language = (value as { language?: string })?.language;
+      const lines = code.split('\n');
+
+      return (
+        <div className="not-prose overflow-hidden rounded-lg border border-white/10 bg-[#0b1221]">
+          <pre className="overflow-x-auto px-4 py-3 text-[13px] leading-[1.5] text-slate-100">
+            {language ? (
+              <span className="mb-2 inline-block text-[11px] uppercase tracking-[0.14em] text-slate-400">
+                {language}
+              </span>
+            ) : null}
+            <code className="block space-y-1">
+              {lines.map((line, idx) => {
+                const match = line.match(/^(\s*[A-Za-z0-9_-]+)(\s*:\s*)(.+)$/);
+                if (!match) {
+                  return (
+                    <div key={idx} className="font-mono">
+                      {line}
+                    </div>
+                  );
+                }
+                const [, key, separator, val] = match;
+                return (
+                  <div key={idx} className="font-mono">
+                    <span className="text-brand-pink">{key}</span>
+                    <span className="text-slate-500">{separator}</span>
+                    <span className="text-amber-100">{val}</span>
+                  </div>
+                );
+              })}
+            </code>
+          </pre>
+        </div>
+      );
+    },
   },
 };
 

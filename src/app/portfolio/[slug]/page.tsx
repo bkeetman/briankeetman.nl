@@ -103,7 +103,7 @@ export default async function PortfolioItemPage({ params }: PageProps) {
   const heroLqip = item.mainImage?.asset?.metadata?.lqip;
 
   return (
-    <div className="min-h-screen bg-brand-dark-light">
+    <div className="min-h-screen bk-bg-gradient">
       {/* Mobile: Back button */}
       <div className="lg:hidden px-4 pt-6 pb-4">
         <Button
@@ -160,7 +160,7 @@ export default async function PortfolioItemPage({ params }: PageProps) {
         </div>
 
         {/* Rechter helft: Content */}
-        <div className="w-full lg:w-1/2 bg-brand-dark-light flex-shrink-0 overflow-y-auto">
+        <div className="w-full lg:w-1/2 bg-transparent flex-shrink-0 overflow-y-auto">
           <div className="px-6 sm:px-8 lg:px-20 xl:px-24 py-12 sm:py-16 lg:py-20 xl:py-24">
             <div className="max-w-2xl mx-auto">
               {/* Desktop: Back button */}
@@ -192,7 +192,7 @@ export default async function PortfolioItemPage({ params }: PageProps) {
                     )}
                   </div>
 
-                  <h1 className="font-display text-4xl sm:text-5xl lg:text-6xl xl:text-7xl tracking-tightest text-white mb-6 leading-[1.05] uppercase">
+                  <h1 className="bk-heading-hero text-white mb-6 leading-[1.05]">
                     {item.title}
                   </h1>
 
@@ -211,12 +211,15 @@ export default async function PortfolioItemPage({ params }: PageProps) {
                   </div>
 
                   {item.website && (
-                      <Button asChild variant="default" className="bg-brand-pink hover:bg-brand-pink/90 text-white rounded-xl">
-                          <a href={item.website} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2">
-                              <span>Bezoek website</span>
-                              <ExternalLink className="h-4 w-4" />
-                          </a>
-                      </Button>
+                    <a
+                      href={item.website}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 rounded-full border border-brand-pink/60 bg-brand-pink/15 px-4 py-2 text-sm font-semibold uppercase tracking-[0.12em] text-brand-pink transition hover:bg-brand-pink/25 hover:border-brand-pink"
+                    >
+                      <span>Bezoek website</span>
+                      <ExternalLink className="h-4 w-4" />
+                    </a>
                   )}
                 </header>
 
@@ -233,7 +236,9 @@ export default async function PortfolioItemPage({ params }: PageProps) {
                     prose-li:text-gray-300 prose-li:my-1 prose-li:text-base
                     prose-strong:text-white prose-strong:font-semibold
                     prose-ul:pl-5 prose-ul:my-6
-                    prose-img:rounded-xl prose-img:shadow-xl prose-img:my-8 prose-img:border prose-img:border-white/10"
+                    prose-img:rounded-xl prose-img:shadow-xl prose-img:my-8 prose-img:border prose-img:border-white/10
+                    prose-pre:bg-transparent prose-pre:border-0 prose-pre:p-0 prose-pre:my-8 prose-pre:overflow-visible
+                    prose-pre-code:bg-transparent prose-pre-code:p-0 prose-pre-code:border-0 prose-pre-code:text-base prose-pre-code:leading-[1.5]"
                 >
                   <SanityPortableText value={item.body} />
                 </div>
