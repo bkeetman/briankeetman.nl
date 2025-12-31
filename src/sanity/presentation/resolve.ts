@@ -3,7 +3,7 @@ import { defineLocations, type PresentationPluginOptions } from 'sanity/presenta
 export const resolve: PresentationPluginOptions['resolve'] = {
   locations: {
     post: defineLocations({
-      select: { title: 'title', slug: 'slug.current' },
+      select: { title: 'title', slug: 'slug.current', _id: '_id' },
       resolve: (doc) => ({
         documentId: doc?._id,
         locations: [
@@ -18,7 +18,7 @@ export const resolve: PresentationPluginOptions['resolve'] = {
       }),
     }),
     portfolio: defineLocations({
-      select: { title: 'title', slug: 'slug.current' },
+      select: { title: 'title', slug: 'slug.current', _id: '_id' },
       resolve: (doc) => ({
         documentId: doc?._id,
         locations: [

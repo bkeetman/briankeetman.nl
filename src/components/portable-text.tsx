@@ -8,7 +8,7 @@ import {
 import { urlFor } from '@/sanity/lib/image';
 
 type Props = {
-  value?: PortableTextBlock[];
+  value?: unknown;
 };
 
 const components: PortableTextComponents = {
@@ -57,9 +57,10 @@ const components: PortableTextComponents = {
 };
 
 export function SanityPortableText({ value }: Props) {
-  if (!value || value.length === 0) {
+  const blocks = (value as PortableTextBlock[] | undefined) ?? [];
+  if (!Array.isArray(blocks) || blocks.length === 0) {
     return null;
   }
 
-  return <PortableText value={value} components={components} />;
+  return <PortableText value={blocks} components={components} />;
 }

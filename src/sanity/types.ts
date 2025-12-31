@@ -2,6 +2,8 @@ import type { PortableTextBlock } from 'sanity';
 
 export type SanityImageWithMetadata = {
   asset?: {
+    _type?: string;
+    _ref?: string;
     _id: string;
     url: string;
     metadata?: {

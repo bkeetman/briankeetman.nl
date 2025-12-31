@@ -1,12 +1,11 @@
 "use client";
 
 import { NextStudio } from 'next-sanity/studio';
-import type { StudioConfig } from 'sanity';
 
 import config from '../../../../sanity.config';
 
-export function StudioWrapper({ config: providedConfig }: { config?: StudioConfig }) {
+export function StudioWrapper({ config: providedConfig }: { config?: unknown }) {
   const studioConfig = providedConfig ?? config;
 
-  return <NextStudio config={studioConfig} />;
+  return <NextStudio config={studioConfig as any} />;
 }

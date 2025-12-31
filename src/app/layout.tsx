@@ -23,12 +23,12 @@ export const metadata: Metadata = {
   description: 'Portfolio website of Brian Keetman',
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const { isEnabled } = draftMode();
+  const { isEnabled } = await draftMode();
 
   return (
     <html suppressHydrationWarning={true} lang="nl" className="dark">
