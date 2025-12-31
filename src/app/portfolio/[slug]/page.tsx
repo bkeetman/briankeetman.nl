@@ -1,13 +1,17 @@
-import { Button } from '@/components/ui/button';
-import {
-    formatPortfolioDate,
-    getAllPortfolioItems,
-    getPortfolioItemBySlug,
-} from '@/lib/portfolio';
 import type { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
+
+import { SanityPortableText } from '@/components/portable-text';
+import { Button } from '@/components/ui/button';
+import { formatPortfolioDate } from '@/lib/date';
+import {
+  getPortfolioItemBySlug,
+  getPortfolioItems,
+  getPortfolioSlugs,
+} from '@/sanity/lib/content';
+import { urlFor } from '@/sanity/lib/image';
 
 const ArrowLeft = ({ className }: { className?: string }) => (
   <svg
@@ -51,7 +55,7 @@ interface PageProps {
 }
 
 export async function generateStaticParams() {
-  const items = await getAllPortfolioItems();
+  const items = await getPortfolioSlugs();
   return items.map((item) => ({
     slug: item.slug,
   }));
@@ -61,7 +65,10 @@ export async function generateMetadata({
   params,
 }: PageProps): Promise<Metadata> {
   const { slug } = await params;
-  const item = await getPortfolioItemBySlug(slug);
+  const item = await getPortfolioItemBySlug(slug, {
+    stega: false,
+    perspective: 'published',
+  });
 
   if (!item) {
     return {
@@ -77,7 +84,7 @@ export async function generateMetadata({
       description: item.description,
       type: 'article',
       publishedTime: item.date,
-      images: item.image ? [item.image] : [],
+      images: item.mainImage?.asset?.url ? [item.mainImage.asset.url] : [],
     },
   };
 }
@@ -89,6 +96,11 @@ export default async function PortfolioItemPage({ params }: PageProps) {
   if (!item) {
     notFound();
   }
+
+  const heroImage = item.mainImage
+    ? urlFor(item.mainImage).width(1600).height(1600).fit('max').url()
+    : null;
+  const heroLqip = item.mainImage?.asset?.metadata?.lqip;
 
   return (
     <div className="min-h-screen bg-brand-dark-light">
@@ -109,14 +121,16 @@ export default async function PortfolioItemPage({ params }: PageProps) {
       <div className="flex flex-col lg:flex-row min-h-screen">
         {/* Linker helft: Image (sticky op desktop) */}
         <div className="w-full lg:w-1/2 h-[40vh] lg:h-screen relative lg:sticky lg:top-0 flex-shrink-0">
-          {item.image ? (
+          {heroImage ? (
             <Image
-              src={item.image}
-              alt={item.title}
+              src={heroImage}
+              alt={item.mainImage?.alt || item.title}
               fill
               className="object-cover"
               sizes="(max-width: 1024px) 100vw, 50vw"
               priority
+              placeholder={heroLqip ? 'blur' : 'empty'}
+              blurDataURL={heroLqip}
             />
           ) : (
             <div className="w-full h-full relative">
@@ -131,11 +145,11 @@ export default async function PortfolioItemPage({ params }: PageProps) {
               <div className="absolute inset-0 bg-gradient-to-br from-brand-dark-light/70 via-brand-dark-light/50 to-transparent"></div>
               <div className="absolute inset-0 flex items-end justify-start p-8 lg:p-12">
                 <div className="text-left z-10 max-w-md">
-                    {item.client && (
-                        <p className="text-brand-pink text-sm uppercase tracking-widest font-semibold mb-2">
-                            {item.client}
-                        </p>
-                    )}
+                  {item.client && (
+                    <p className="text-brand-pink text-sm uppercase tracking-widest font-semibold mb-2">
+                      {item.client}
+                    </p>
+                  )}
                   <h2 className="font-display text-2xl lg:text-4xl tracking-tight text-white mb-3 drop-shadow-lg uppercase">
                     {item.title}
                   </h2>
@@ -168,7 +182,7 @@ export default async function PortfolioItemPage({ params }: PageProps) {
                 <header className="mb-12 lg:mb-16">
                   <div className="flex items-center gap-4 mb-4 text-sm font-medium uppercase tracking-[0.2em] text-gray-400">
                     <time dateTime={item.date} className="text-brand-pink">
-                         {formatPortfolioDate(item.date)}
+                         {formatPortfolioDate(item.date || '')}
                     </time>
                     {item.client && (
                         <>
@@ -221,7 +235,7 @@ export default async function PortfolioItemPage({ params }: PageProps) {
                     prose-ul:pl-5 prose-ul:my-6
                     prose-img:rounded-xl prose-img:shadow-xl prose-img:my-8 prose-img:border prose-img:border-white/10"
                 >
-                  {item.mdxContent}
+                  <SanityPortableText value={item.body} />
                 </div>
               </article>
             </div>

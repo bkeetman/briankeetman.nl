@@ -1,6 +1,10 @@
-import { formatPortfolioDate, getAllPortfolioItems } from '@/lib/portfolio';
+import { stegaClean } from '@sanity/client/stega';
 import Image from 'next/image';
 import Link from 'next/link';
+
+import { formatPortfolioDate } from '@/lib/date';
+import { getPortfolioItems } from '@/sanity/lib/content';
+import { urlFor } from '@/sanity/lib/image';
 
 const ArrowLeft = ({ className }: { className?: string }) => (
   <svg
@@ -27,7 +31,7 @@ export const metadata = {
 };
 
 export default async function PortfolioIndex() {
-  const items = await getAllPortfolioItems();
+  const items = await getPortfolioItems();
 
   return (
     <div className="min-h-screen bg-brand-dark-light">
@@ -79,78 +83,93 @@ export default async function PortfolioIndex() {
                   </p>
                 </div>
               ) : (
-                items.map((item) => (
-                  <article
-                    key={item.slug}
-                    className="group rounded-3xl border border-white/5 bg-white/5 p-6 sm:p-8 hover:border-brand-pink/60 hover:bg-white/10 transition-colors"
-                  >
-                    <div className="flex flex-col gap-4">
-                      <div className="flex items-center gap-4 text-sm font-medium uppercase tracking-[0.35em] text-gray-400">
-                        <span className="text-brand-pink tracking-[0.4em]">
-                          {formatPortfolioDate(item.date)}
-                        </span>
-                        {item.client && (
+                items.map((item) => {
+                  const slug = stegaClean(item.slug);
+                  const thumb = item.mainImage
+                    ? urlFor(item.mainImage).width(360).height(200).fit('crop').url()
+                    : null;
+
+                  return (
+                    <article
+                      key={slug}
+                      className="group rounded-3xl border border-white/5 bg-white/5 p-6 sm:p-8 hover:border-brand-pink/60 hover:bg-white/10 transition-colors"
+                    >
+                      <div className="flex flex-col gap-4">
+                        <div className="flex items-center gap-4 text-sm font-medium uppercase tracking-[0.35em] text-gray-400">
+                          <span className="text-brand-pink tracking-[0.4em]">
+                            {formatPortfolioDate(item.date || '')}
+                          </span>
+                          {item.client && (
                             <>
-                                <span className="text-gray-600">•</span>
-                                <span>{item.client}</span>
+                              <span className="text-gray-600">•</span>
+                              <span>{item.client}</span>
                             </>
-                        )}
-                      </div>
-                      <div>
-                        <h2 className="font-display text-3xl sm:text-4xl tracking-tight text-white uppercase mb-4 leading-[1.05] group-hover:text-brand-pink transition-colors">
-                          <Link href={`/portfolio/${item.slug}`}>{item.title}</Link>
-                        </h2>
-                        {item.description && (
-                          <p className="text-gray-300 text-base leading-relaxed">
-                            {item.description}
-                          </p>
-                        )}
-                        {item.technologies && item.technologies.length > 0 && (
+                          )}
+                        </div>
+                        <div>
+                          <h2 className="font-display text-3xl sm:text-4xl tracking-tight text-white uppercase mb-4 leading-[1.05] group-hover:text-brand-pink transition-colors">
+                            <Link href={`/portfolio/${slug}`}>{item.title}</Link>
+                          </h2>
+                          {item.description && (
+                            <p className="text-gray-300 text-base leading-relaxed">
+                              {item.description}
+                            </p>
+                          )}
+                          {item.technologies && item.technologies.length > 0 && (
                             <div className="flex flex-wrap gap-2 mt-4">
-                                {item.technologies.map((tech) => (
-                                    <span key={tech} className="text-xs uppercase tracking-wider bg-white/10 text-gray-300 px-2 py-1 rounded">
-                                        {tech}
-                                    </span>
-                                ))}
+                              {item.technologies.map((tech) => (
+                                <span
+                                  key={tech}
+                                  className="text-xs uppercase tracking-wider bg-white/10 text-gray-300 px-2 py-1 rounded"
+                                >
+                                  {tech}
+                                </span>
+                              ))}
                             </div>
-                        )}
-                      </div>
-                      <div className="flex items-center justify-between pt-4 text-sm font-semibold uppercase tracking-wide">
-                        <Link
-                          href={`/portfolio/${item.slug}`}
-                          className="inline-flex items-center gap-2 text-brand-pink hover:text-white transition-colors"
-                        >
-                          Bekijk project
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            width="16"
-                            height="16"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="currentColor"
-                            strokeWidth="2"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            className="h-4 w-4"
+                          )}
+                        </div>
+                        <div className="flex items-center justify-between pt-4 text-sm font-semibold uppercase tracking-wide">
+                          <Link
+                            href={`/portfolio/${slug}`}
+                            className="inline-flex items-center gap-2 text-brand-pink hover:text-white transition-colors"
                           >
-                            <path d="M5 12h14" />
-                            <path d="m12 5 7 7-7 7" />
-                          </svg>
-                        </Link>
-                        {item.image && (
-                          <div className="relative h-16 w-28 overflow-hidden rounded-xl border border-white/10">
-                            <Image
-                              src={item.image}
-                              alt={item.title}
-                              fill
-                              className="object-cover"
-                            />
-                          </div>
-                        )}
+                            Bekijk project
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              width="16"
+                              height="16"
+                              viewBox="0 0 24 24"
+                              fill="none"
+                              stroke="currentColor"
+                              strokeWidth="2"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              className="h-4 w-4"
+                            >
+                              <path d="M5 12h14" />
+                              <path d="m12 5 7 7-7 7" />
+                            </svg>
+                          </Link>
+                          {thumb && (
+                            <div className="relative h-16 w-28 overflow-hidden rounded-xl border border-white/10">
+                              <Image
+                                src={thumb}
+                                alt={item.title}
+                                fill
+                                className="object-cover"
+                                sizes="112px"
+                                placeholder={
+                                  item.mainImage?.asset?.metadata?.lqip ? 'blur' : 'empty'
+                                }
+                                blurDataURL={item.mainImage?.asset?.metadata?.lqip}
+                              />
+                            </div>
+                          )}
+                        </div>
                       </div>
-                    </div>
-                  </article>
-                ))
+                    </article>
+                  );
+                })
               )}
             </div>
           </div>

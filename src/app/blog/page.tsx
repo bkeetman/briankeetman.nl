@@ -1,6 +1,10 @@
-import { formatPostDate, getAllPosts } from '@/lib/posts';
+import { stegaClean } from '@sanity/client/stega';
 import Image from 'next/image';
 import Link from 'next/link';
+
+import { formatPostDate } from '@/lib/date';
+import { getPosts } from '@/sanity/lib/content';
+import { urlFor } from '@/sanity/lib/image';
 
 const ArrowLeft = ({ className }: { className?: string }) => (
   <svg
@@ -27,7 +31,7 @@ export const metadata = {
 };
 
 export default async function BlogIndex() {
-  const posts = await getAllPosts();
+  const posts = await getPosts();
 
   return (
     <div className="min-h-screen bg-brand-dark-light">
@@ -86,63 +90,75 @@ export default async function BlogIndex() {
                   </p>
                 </div>
               ) : (
-                posts.map((post) => (
-                  <article
-                    key={post.slug}
-                    className="group rounded-3xl border border-white/5 bg-white/5 p-6 sm:p-8 hover:border-brand-pink/60 hover:bg-white/10 transition-colors"
-                  >
-                    <div className="flex flex-col gap-4">
-                      <div className="flex items-center gap-4 text-sm font-medium uppercase tracking-[0.35em] text-gray-400">
-                        <span className="text-brand-pink tracking-[0.4em]">
-                          {formatPostDate(post.date)}
-                        </span>
-                      </div>
-                      <div>
-                        <h2 className="font-display text-3xl sm:text-4xl tracking-tight text-white uppercase mb-4 leading-[1.05] group-hover:text-brand-pink transition-colors">
-                          <Link href={`/blog/${post.slug}`}>{post.title}</Link>
-                        </h2>
-                        {post.description && (
-                          <p className="text-gray-300 text-base leading-relaxed">
-                            {post.description}
-                          </p>
-                        )}
-                      </div>
-                      <div className="flex items-center justify-between pt-4 text-sm font-semibold uppercase tracking-wide">
-                        <Link
-                          href={`/blog/${post.slug}`}
-                          className="inline-flex items-center gap-2 text-brand-pink hover:text-white transition-colors"
-                        >
-                          Lees artikel
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            width="16"
-                            height="16"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="currentColor"
-                            strokeWidth="2"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            className="h-4 w-4"
+                posts.map((post) => {
+                  const slug = stegaClean(post.slug);
+                  const thumb = post.mainImage
+                    ? urlFor(post.mainImage).width(360).height(200).fit('crop').url()
+                    : null;
+
+                  return (
+                    <article
+                      key={slug}
+                      className="group rounded-3xl border border-white/5 bg-white/5 p-6 sm:p-8 hover:border-brand-pink/60 hover:bg-white/10 transition-colors"
+                    >
+                      <div className="flex flex-col gap-4">
+                        <div className="flex items-center gap-4 text-sm font-medium uppercase tracking-[0.35em] text-gray-400">
+                          <span className="text-brand-pink tracking-[0.4em]">
+                            {formatPostDate(post.publishedAt || '')}
+                          </span>
+                        </div>
+                        <div>
+                          <h2 className="font-display text-3xl sm:text-4xl tracking-tight text-white uppercase mb-4 leading-[1.05] group-hover:text-brand-pink transition-colors">
+                            <Link href={`/blog/${slug}`}>{post.title}</Link>
+                          </h2>
+                          {post.description && (
+                            <p className="text-gray-300 text-base leading-relaxed">
+                              {post.description}
+                            </p>
+                          )}
+                        </div>
+                        <div className="flex items-center justify-between pt-4 text-sm font-semibold uppercase tracking-wide">
+                          <Link
+                            href={`/blog/${slug}`}
+                            className="inline-flex items-center gap-2 text-brand-pink hover:text-white transition-colors"
                           >
-                            <path d="M5 12h14" />
-                            <path d="m12 5 7 7-7 7" />
-                          </svg>
-                        </Link>
-                        {post.image && (
-                          <div className="relative h-16 w-28 overflow-hidden rounded-xl border border-white/10">
-                            <Image
-                              src={post.image}
-                              alt={post.title}
-                              fill
-                              className="object-cover"
-                            />
-                          </div>
-                        )}
+                            Lees artikel
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              width="16"
+                              height="16"
+                              viewBox="0 0 24 24"
+                              fill="none"
+                              stroke="currentColor"
+                              strokeWidth="2"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              className="h-4 w-4"
+                            >
+                              <path d="M5 12h14" />
+                              <path d="m12 5 7 7-7 7" />
+                            </svg>
+                          </Link>
+                          {thumb && (
+                            <div className="relative h-16 w-28 overflow-hidden rounded-xl border border-white/10">
+                              <Image
+                                src={thumb}
+                                alt={post.title}
+                                fill
+                                className="object-cover"
+                                sizes="112px"
+                                placeholder={
+                                  post.mainImage?.asset?.metadata?.lqip ? 'blur' : 'empty'
+                                }
+                                blurDataURL={post.mainImage?.asset?.metadata?.lqip}
+                              />
+                            </div>
+                          )}
+                        </div>
                       </div>
-                    </div>
-                  </article>
-                ))
+                    </article>
+                  );
+                })
               )}
             </div>
           </div>

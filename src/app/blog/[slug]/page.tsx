@@ -1,9 +1,16 @@
-import { Button } from '@/components/ui/button';
-import { formatPostDate, getAllPosts, getPostBySlug } from '@/lib/posts';
 import type { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
+
+import { SanityPortableText } from '@/components/portable-text';
+import { Button } from '@/components/ui/button';
+import { formatPostDate } from '@/lib/date';
+import {
+  getPostBySlug,
+  getPostSlugs,
+} from '@/sanity/lib/content';
+import { urlFor } from '@/sanity/lib/image';
 
 const ArrowLeft = ({ className }: { className?: string }) => (
   <svg
@@ -28,8 +35,8 @@ interface PageProps {
 }
 
 export async function generateStaticParams() {
-  const posts = await getAllPosts();
-  return posts.map((post) => ({
+  const slugs = await getPostSlugs();
+  return slugs.map((post) => ({
     slug: post.slug,
   }));
 }
@@ -38,7 +45,7 @@ export async function generateMetadata({
   params,
 }: PageProps): Promise<Metadata> {
   const { slug } = await params;
-  const post = await getPostBySlug(slug);
+  const post = await getPostBySlug(slug, { stega: false, perspective: 'published' });
 
   if (!post) {
     return {
@@ -53,8 +60,8 @@ export async function generateMetadata({
       title: post.title,
       description: post.description,
       type: 'article',
-      publishedTime: post.date,
-      images: post.image ? [post.image] : [],
+      publishedTime: post.publishedAt,
+      images: post.mainImage?.asset?.url ? [post.mainImage.asset.url] : [],
     },
   };
 }
@@ -66,6 +73,11 @@ export default async function BlogPost({ params }: PageProps) {
   if (!post) {
     notFound();
   }
+
+  const heroImage = post.mainImage
+    ? urlFor(post.mainImage).width(1600).height(1600).fit('max').url()
+    : null;
+  const heroLqip = post.mainImage?.asset?.metadata?.lqip;
 
   return (
     <div className="min-h-screen bg-brand-dark-light">
@@ -86,18 +98,19 @@ export default async function BlogPost({ params }: PageProps) {
       <div className="flex flex-col lg:flex-row min-h-screen">
         {/* Linker helft: Image (sticky op desktop) */}
         <div className="w-full lg:w-1/2 h-[40vh] lg:h-screen relative lg:sticky lg:top-0 flex-shrink-0">
-          {post.image ? (
+          {heroImage ? (
             <Image
-              src={post.image}
-              alt={post.title}
+              src={heroImage}
+              alt={post.mainImage?.alt || post.title}
               fill
               className="object-cover"
               sizes="(max-width: 1024px) 100vw, 50vw"
               priority
+              placeholder={heroLqip ? 'blur' : 'empty'}
+              blurDataURL={heroLqip}
             />
           ) : (
             <div className="w-full h-full relative">
-              {/* Fallback: gebruik background.webp als standaard */}
               <Image
                 src="/background.webp"
                 alt={post.title}
@@ -106,9 +119,7 @@ export default async function BlogPost({ params }: PageProps) {
                 sizes="(max-width: 1024px) 100vw, 50vw"
                 priority
               />
-              {/* Overlay met gradient voor betere tekst leesbaarheid */}
               <div className="absolute inset-0 bg-gradient-to-br from-brand-dark-light/70 via-brand-dark-light/50 to-transparent"></div>
-              {/* Titel overlay - bottom aligned */}
               <div className="absolute inset-0 flex items-end justify-start p-8 lg:p-12">
                 <div className="text-left z-10 max-w-md">
                   <h2 className="font-display text-2xl lg:text-4xl tracking-tight text-white mb-3 drop-shadow-lg uppercase">
@@ -151,10 +162,10 @@ export default async function BlogPost({ params }: PageProps) {
                   </h1>
                   <div className="flex items-center gap-4 mb-8">
                     <time
-                      dateTime={post.date}
+                      dateTime={post.publishedAt}
                       className="text-brand-pink text-sm sm:text-base font-medium"
                     >
-                      {formatPostDate(post.date)}
+                      {formatPostDate(post.publishedAt || '')}
                     </time>
                   </div>
                   {post.description && (
@@ -188,7 +199,7 @@ export default async function BlogPost({ params }: PageProps) {
                     prose-th:text-white prose-th:border-white/10 prose-th:font-semibold
                     prose-td:border-white/10 prose-td:py-3"
                 >
-                  {post.mdxContent}
+                  <SanityPortableText value={post.body} />
                 </div>
               </article>
             </div>
