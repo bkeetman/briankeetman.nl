@@ -63,12 +63,12 @@ export function BrandLogo() {
 export function BrandNavbar(props: NavbarProps) {
   return (
     <Card
-      padding={3}
-      shadow={1}
+      padding={2}
+      shadow={0}
       style={{
         backgroundColor: '#1a1919',
         backgroundImage: gradient,
-        borderBottom: '1px solid rgba(255,255,255,0.08)',
+        borderBottom: '1px solid rgba(255,255,255,0.06)',
       }}
     >
       {props.renderDefault(props)}
@@ -78,41 +78,47 @@ export function BrandNavbar(props: NavbarProps) {
 
 export function BrandLayout(props: LayoutProps) {
   return (
-    <Card
-      padding={4}
-      radius={0}
+    <Box
       style={{
         minHeight: '100vh',
         backgroundColor: '#1a1919',
         backgroundImage: gradient,
       }}
     >
-      <Card
-        padding={3}
-        shadow={1}
-        radius={3}
+      <Box
         style={{
-          backgroundColor: '#0f0f0f',
-          border: '1px solid rgba(255,255,255,0.05)',
-          minHeight: 'calc(100vh - 48px)',
+          maxWidth: '1440px',
+          margin: '0 auto',
+          padding: '12px 16px 28px',
         }}
       >
-        {props.renderDefault(props)}
-      </Card>
-    </Card>
+        <Card
+          radius={3}
+          shadow={1}
+          padding={3}
+          style={{
+            backgroundColor: '#0c0c0c',
+            border: '1px solid rgba(255,255,255,0.05)',
+            minHeight: 'calc(100vh - 40px)',
+          }}
+        >
+          {props.renderDefault(props)}
+        </Card>
+      </Box>
+    </Box>
   );
 }
 
 export function BrandToolMenu(props: ToolMenuProps) {
   return (
     <Card
-      padding={3}
+      padding={2}
       radius={2}
-      shadow={1}
+      shadow={0}
       style={{
-        backgroundColor: '#131313',
-        border: '1px solid rgba(255,255,255,0.06)',
-        margin: '0.75rem',
+        backgroundColor: '#111',
+        border: '1px solid rgba(255,255,255,0.07)',
+        margin: '0.5rem',
       }}
     >
       {props.renderDefault(props)}
