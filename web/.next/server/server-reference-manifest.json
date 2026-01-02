@@ -1,17 +1,1 @@
-{
-  "node": {
-    "7fb7c924a5a526f912345268f062eefd7f414fa28d": {
-      "workers": {
-        "app/blog/page": {
-          "moduleId": "[project]/.next-internal/server/app/blog/page/actions.js { ACTIONS_MODULE0 => \"[project]/node_modules/next-sanity/dist/visual-editing/server-actions/index.js [app-rsc] (ecmascript)\" } [app-rsc] (ecmascript)",
-          "async": false
-        }
-      },
-      "layer": {
-        "app/blog/page": "action-browser"
-      }
-    }
-  },
-  "edge": {},
-  "encryptionKey": "DyL3EUu6ZWXKplv/bkSsbxlQIrQzl7WedLRxs50GlJM="
-}
+{"node":{"7ffb3b029848584f4d7c924dd6bec494b41b37a5ff":{"workers":{"app/blog/page":{"moduleId":"95890","async":false}},"layer":{"app/blog/page":"action-browser"}}},"edge":{},"encryptionKey":"DyL3EUu6ZWXKplv/bkSsbxlQIrQzl7WedLRxs50GlJM="}
