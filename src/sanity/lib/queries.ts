@@ -4,6 +4,7 @@ const imageFields = /* groq */ `
   mainImage{
     asset->{
       _id,
+      "_ref": _id,
       url,
       metadata{
         lqip,
