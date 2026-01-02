@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 7, "column": 0}, "map": {"version":3,"sources":["file:///Users/brian/dev/projects/briankeetman.nl/web/src/components/visual-editing-client.tsx"],"sourcesContent":["\"use client\";\n\nimport { VisualEditing } from 'next-sanity/visual-editing';\n\nexport function VisualEditingClient() {\n  return <VisualEditing />;\n}\n"],"names":[],"mappings":";;;;AAEA;AAFA;;;AAIO,SAAS;IACd,qBAAO,6LAAC,uKAAA,CAAA,gBAAa;;;;;AACvB;KAFgB"}},
+    {"offset": {"line": 28, "column": 0}, "map": {"version":3,"sources":[],"names":[],"mappings":"A"}}]
+}

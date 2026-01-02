@@ -1,0 +1,16 @@
+{
+  "node": {
+    "7fb7c924a5a526f912345268f062eefd7f414fa28d": {
+      "workers": {
+        "app/blog/page": {
+          "moduleId": "[project]/.next-internal/server/app/blog/page/actions.js { ACTIONS_MODULE0 => \"[project]/node_modules/next-sanity/dist/visual-editing/server-actions/index.js [app-rsc] (ecmascript)\" } [app-rsc] (ecmascript)",
+          "async": false
+        }
+      },
+      "layer": {
+        "app/blog/page": "action-browser"
+      }
+    }
+  },
+  "edge": {}
+}

@@ -1,0 +1,15 @@
+{
+  "name": "briankeetman-studio",
+  "private": true,
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "sanity dev",
+    "schema": "sanity schema deploy",
+    "deploy": "sanity deploy"
+  },
+  "dependencies": {
+    "@sanity/code-input": "^6.0.4",
+    "@sanity/vision": "^4.22.0",
+    "sanity": "^4.22.0"
+  }
+}
