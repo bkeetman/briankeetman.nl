@@ -1,14 +1,11 @@
 import React from 'react';
-import { Card, Flex, Stack, Text } from '@sanity/ui';
+import type { LayoutProps, NavbarProps, ToolMenuProps } from 'sanity';
+import { Box, Card, Flex, Stack, Text } from '@sanity/ui';
 
 const gradient =
   'radial-gradient(circle at 20% 20%, rgba(213, 20, 123, 0.12), transparent 30%), ' +
   'radial-gradient(circle at 80% 10%, rgba(116, 47, 255, 0.12), transparent 28%), ' +
   'radial-gradient(circle at 50% 80%, rgba(18, 168, 168, 0.12), transparent 26%)';
-
-type NavbarProps = {
-  renderDefault: (props: unknown) => React.ReactNode;
-};
 
 export function BrandLogo() {
   return (
@@ -23,17 +20,18 @@ export function BrandLogo() {
           border: '1px solid rgba(255,255,255,0.1)',
         }}
       >
-        <Text
-          size={3}
-          weight="bold"
+        <Box
+          as="img"
+          src="/logo.svg"
+          alt="Brian Keetman"
           style={{
-            letterSpacing: '0.12em',
-            textTransform: 'uppercase',
-            color: '#fdf2ff',
+            display: 'block',
+            width: '44px',
+            height: '44px',
+            objectFit: 'contain',
+            filter: 'drop-shadow(0 0 18px rgba(213,20,123,0.35))',
           }}
-        >
-          BK
-        </Text>
+        />
       </Card>
       <Stack space={1}>
         <Text
@@ -71,6 +69,50 @@ export function BrandNavbar(props: NavbarProps) {
         backgroundColor: '#1a1919',
         backgroundImage: gradient,
         borderBottom: '1px solid rgba(255,255,255,0.08)',
+      }}
+    >
+      {props.renderDefault(props)}
+    </Card>
+  );
+}
+
+export function BrandLayout(props: LayoutProps) {
+  return (
+    <Card
+      padding={4}
+      radius={0}
+      style={{
+        minHeight: '100vh',
+        backgroundColor: '#1a1919',
+        backgroundImage: gradient,
+      }}
+    >
+      <Card
+        padding={3}
+        shadow={1}
+        radius={3}
+        style={{
+          backgroundColor: '#0f0f0f',
+          border: '1px solid rgba(255,255,255,0.05)',
+          minHeight: 'calc(100vh - 48px)',
+        }}
+      >
+        {props.renderDefault(props)}
+      </Card>
+    </Card>
+  );
+}
+
+export function BrandToolMenu(props: ToolMenuProps) {
+  return (
+    <Card
+      padding={3}
+      radius={2}
+      shadow={1}
+      style={{
+        backgroundColor: '#131313',
+        border: '1px solid rgba(255,255,255,0.06)',
+        margin: '0.75rem',
       }}
     >
       {props.renderDefault(props)}

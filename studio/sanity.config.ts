@@ -3,7 +3,7 @@ import { visionTool } from '@sanity/vision';
 import { defineConfig } from 'sanity';
 import { structureTool } from 'sanity/structure';
 
-import { BrandLogo, BrandNavbar } from './branding';
+import { BrandLayout, BrandLogo, BrandNavbar, BrandToolMenu } from './branding';
 import { dataset, projectId } from './sanity.env';
 import { schemaTypes } from './schemaTypes';
 
@@ -19,6 +19,8 @@ export default defineConfig({
     components: {
       logo: BrandLogo,
       navbar: BrandNavbar,
+      layout: BrandLayout,
+      toolMenu: BrandToolMenu,
     },
   },
   plugins: [
