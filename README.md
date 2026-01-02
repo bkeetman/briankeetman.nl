@@ -50,7 +50,21 @@ src/
 
 This project is deployed on [Vercel](https://vercel.com). The repository is connected to Vercel for automatic deployments on push to the `main` branch.
 
+## Sanity Studio & Content Webhook
+
+- Structure: `web/` (Next.js site) and `studio/` (standalone Sanity Studio).
+- Revalidation endpoint: `web/src/app/api/revalidate/route.ts` (expects `SANITY_REVALIDATE_SECRET`).
+
+Add a webhook in Sanity to purge the Next.js cache after publishing:
+1. In Sanity Studio: Settings → API → Webhooks → “Create”.
+2. URL: `https://<your-site>/api/revalidate` (or dev URL).
+3. Method: POST, Body (JSON):
+   ```json
+   { "secret": "<same-as-SANITY_REVALIDATE_SECRET>", "type": "post", "slug": "{slug.current}" }
+   ```
+   Use `"type": "portfolio"` for portfolio items. Content-Type: `application/json`.
+4. Trigger on publish/unpublish for `post` and `portfolio`.
+
 ## License
 
 Private project - All rights reserved.
-

@@ -75,7 +75,7 @@ export default async function BlogIndex() {
         {/* List */}
         <div className="w-full lg:w-1/2 bg-transparent flex-shrink-0 overflow-y-auto">
           <div className="px-6 sm:px-8 lg:px-20 xl:px-24 py-12 sm:py-16 lg:py-20 xl:py-24">
-            <div className="max-w-2xl mx-auto space-y-10">
+            <div className="max-w-2xl mx-auto space-y-8">
               {posts.length === 0 ? (
                 <div className="rounded-2xl border border-white/10 bg-white/5 px-6 py-10 text-center">
                   <p className="font-display text-2xl text-brand-pink uppercase tracking-tight mb-4">
@@ -100,25 +100,25 @@ export default async function BlogIndex() {
                   return (
                     <article
                       key={slug}
-                      className="group rounded-3xl border border-white/5 bg-white/5 p-6 sm:p-8 hover:border-brand-pink/60 hover:bg-white/10 transition-colors"
+                      className="group relative overflow-hidden rounded-2xl border border-white/10 bg-brand-dark/70 p-6 sm:p-7 ring-1 ring-white/5 hover:border-brand-pink/60 hover:ring-brand-pink/30 transition"
                     >
                       <div className="flex flex-col gap-4">
-                        <div className="flex items-center gap-4 text-sm font-medium uppercase tracking-[0.35em] text-gray-400">
-                          <span className="text-brand-pink tracking-[0.4em]">
+                        <div className="flex items-center gap-3 text-[11px] font-semibold uppercase tracking-[0.3em] text-gray-400">
+                          <span className="text-brand-pink">
                             {formatPostDate(post.publishedAt || '')}
                           </span>
                         </div>
                         <div>
-                        <h2 className="bk-heading-sub text-3xl sm:text-4xl mb-4 leading-[1.05] group-hover:text-brand-pink transition-colors">
+                        <h2 className="bk-heading-sub text-3xl sm:text-4xl mb-3 leading-[1.05] group-hover:text-brand-pink transition-colors">
                           <Link href={`/blog/${slug}`}>{post.title}</Link>
                         </h2>
                           {post.description && (
-                            <p className="text-gray-300 text-base leading-relaxed">
+                            <p className="text-gray-200 text-base leading-relaxed">
                               {post.description}
                             </p>
                           )}
                         </div>
-                        <div className="flex items-center justify-between pt-4 text-sm font-semibold uppercase tracking-wide">
+                        <div className="flex items-center justify-between pt-3 text-sm font-semibold uppercase tracking-wide">
                           <Link
                             href={`/blog/${slug}`}
                             className="inline-flex items-center gap-2 text-brand-pink hover:text-white transition-colors"

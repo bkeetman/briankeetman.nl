@@ -46,7 +46,7 @@ export default async function PortfolioIndex() {
             sizes="(max-width: 1024px) 100vw, 50vw"
             priority
           />
-          <div className="absolute inset-0 bg-gradient-to-br from-brand-dark-light/80 via-brand-dark-light/60 to-brand-dark-light/30" />
+          <div className="absolute inset-0 bg-gradient-to-br from-brand-dark/85 via-brand-dark/65 to-brand-dark/40" />
           <div className="absolute inset-0 flex flex-col justify-end p-8 lg:p-12 gap-6">
             <Link
               href="/"
@@ -56,11 +56,13 @@ export default async function PortfolioIndex() {
               Terug naar home
             </Link>
             <div>
-              <p className="text-xs uppercase tracking-[0.4em] text-white/70 mb-4">
+              <p className="text-xs uppercase tracking-[0.35em] text-white/70 mb-3">
                 Portfolio
               </p>
-              <h1 className="bk-heading-hero leading-[1.05]">Gerealiseerde Projecten</h1>
-              <p className="mt-6 max-w-lg text-base sm:text-lg text-gray-200 leading-relaxed">
+              <h1 className="bk-heading-hero leading-[1.05] drop-shadow-[0_2px_12px_rgba(0,0,0,0.35)]">
+                Gerealiseerde Projecten
+              </h1>
+              <p className="mt-5 max-w-lg text-base sm:text-lg text-gray-100 leading-relaxed drop-shadow-[0_2px_10px_rgba(0,0,0,0.35)]">
                 Een overzicht van digitale producten, platforms en applicaties die ik heb ontworpen en ontwikkeld.
               </p>
             </div>
@@ -70,7 +72,7 @@ export default async function PortfolioIndex() {
         {/* List */}
         <div className="w-full lg:w-1/2 bg-transparent flex-shrink-0 overflow-y-auto">
           <div className="px-6 sm:px-8 lg:px-20 xl:px-24 py-12 sm:py-16 lg:py-20 xl:py-24">
-            <div className="max-w-2xl mx-auto space-y-10">
+            <div className="max-w-2xl mx-auto space-y-8">
               {items.length === 0 ? (
                 <div className="rounded-2xl border border-white/10 bg-white/5 px-6 py-10 text-center">
                   <p className="font-display text-2xl text-brand-pink uppercase tracking-tight mb-4">
@@ -90,11 +92,11 @@ export default async function PortfolioIndex() {
                   return (
                     <article
                       key={slug}
-                      className="group rounded-3xl border border-white/5 bg-white/5 p-6 sm:p-8 hover:border-brand-pink/60 hover:bg-white/10 transition-colors"
+                      className="group relative overflow-hidden rounded-2xl border border-white/10 bg-brand-dark/70 p-6 sm:p-7 ring-1 ring-white/5 hover:border-brand-pink/60 hover:ring-brand-pink/30 transition"
                     >
                       <div className="flex flex-col gap-4">
-                        <div className="flex items-center gap-4 text-sm font-medium uppercase tracking-[0.35em] text-gray-400">
-                          <span className="text-brand-pink tracking-[0.4em]">
+                        <div className="flex items-center gap-3 text-[11px] font-semibold uppercase tracking-[0.3em] text-gray-400">
+                          <span className="text-brand-pink">
                             {formatPortfolioDate(item.date || '')}
                           </span>
                           {item.client && (
@@ -105,11 +107,11 @@ export default async function PortfolioIndex() {
                           )}
                         </div>
                         <div>
-                        <h2 className="bk-heading-sub text-3xl sm:text-4xl mb-4 leading-[1.05] group-hover:text-brand-pink transition-colors">
+                        <h2 className="bk-heading-sub text-3xl sm:text-4xl mb-3 leading-[1.05] group-hover:text-brand-pink transition-colors">
                           <Link href={`/portfolio/${slug}`}>{item.title}</Link>
                         </h2>
                           {item.description && (
-                            <p className="text-gray-300 text-base leading-relaxed">
+                            <p className="text-gray-200 text-base leading-relaxed">
                               {item.description}
                             </p>
                           )}
@@ -126,7 +128,7 @@ export default async function PortfolioIndex() {
                             </div>
                           )}
                         </div>
-                        <div className="flex items-center justify-between pt-4 text-sm font-semibold uppercase tracking-wide">
+                        <div className="flex items-center justify-between pt-3 text-sm font-semibold uppercase tracking-wide">
                           <Link
                             href={`/portfolio/${slug}`}
                             className="inline-flex items-center gap-2 text-brand-pink hover:text-white transition-colors"
