@@ -99,7 +99,11 @@ export function BrandLayout(props: LayoutProps) {
           style={{
             backgroundColor: '#0c0c0c',
             border: '1px solid rgba(255,255,255,0.05)',
-            minHeight: 'calc(100vh - 40px)',
+            height: 'calc(100vh - 32px)',
+            minHeight: 'calc(100vh - 32px)',
+            display: 'flex',
+            flexDirection: 'column',
+            overflow: 'hidden',
           }}
         >
           {props.renderDefault(props)}
