@@ -11,13 +11,14 @@
 /coverage
 
 # next.js
-/.next/
+/web/.next
+.next
 /out/
 
 # production
 /build
 /dist
-.next
+
 
 # misc
 .DS_Store
