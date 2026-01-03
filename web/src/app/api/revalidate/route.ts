@@ -10,6 +10,7 @@ type RevalidateBody = {
 export async function POST(req: NextRequest) {
   const secret = process.env.SANITY_REVALIDATE_SECRET;
   if (!secret) {
+    console.error('Revalidate request rejected: missing SANITY_REVALIDATE_SECRET');
     return NextResponse.json(
       { ok: false, message: 'Missing SANITY_REVALIDATE_SECRET env' },
       { status: 500 }
@@ -17,12 +18,26 @@ export async function POST(req: NextRequest) {
   }
 
   const body = (await req.json().catch(() => null)) as RevalidateBody | null;
+  if (!body) {
+    console.warn('Revalidate request rejected: unable to parse body');
+  }
   if (!body || body.secret !== secret) {
+    console.warn('Revalidate request rejected: invalid secret', {
+      hasBody: Boolean(body),
+      type: body?.type,
+      slug: body?.slug,
+      hasSecret: Boolean(body?.secret),
+    });
     return NextResponse.json(
       { ok: false, message: 'Invalid secret' },
       { status: 401 }
     );
   }
+
+  console.info('Revalidate request accepted', {
+    type: body.type,
+    slug: body.slug,
+  });
 
   const tags = new Set<string>();
 
@@ -38,7 +53,10 @@ export async function POST(req: NextRequest) {
     tags.add('portfolio');
   }
 
-  tags.forEach((tag) => revalidateTag(tag));
+  const tagsList = Array.from(tags);
+  tagsList.forEach((tag) => revalidateTag(tag));
 
-  return NextResponse.json({ ok: true, tags: Array.from(tags) });
+  console.info('Revalidate request processed', { tags: tagsList });
+
+  return NextResponse.json({ ok: true, tags: tagsList });
 }
