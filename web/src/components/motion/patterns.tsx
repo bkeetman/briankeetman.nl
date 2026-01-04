@@ -1,7 +1,7 @@
 'use client';
 
-import type { ComponentPropsWithoutRef, ReactNode } from 'react';
-import { motion } from 'motion/react';
+import type { ReactNode } from 'react';
+import { motion, type HTMLMotionProps } from 'motion/react';
 
 type FadeInProps = {
   children: ReactNode;
@@ -23,9 +23,10 @@ export function FadeIn({ children, delay = 0, className }: FadeInProps) {
   );
 }
 
-type MotionCardProps = ComponentPropsWithoutRef<typeof motion.article> & {
+type MotionCardProps = HTMLMotionProps<'article'> & {
   delay?: number;
   glow?: boolean;
+  children?: ReactNode;
 };
 
 export function MotionCard({
@@ -59,8 +60,9 @@ export function MotionCard({
   );
 }
 
-type ShimmerLinkProps = ComponentPropsWithoutRef<'a'> & {
+type ShimmerLinkProps = HTMLMotionProps<'a'> & {
   pulse?: boolean;
+  children?: ReactNode;
 };
 
 export function ShimmerLink({
