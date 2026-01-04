@@ -21,6 +21,7 @@
     "date-fns": "^3.0.0",
     "eslint": "^9.18.0",
     "eslint-config-next": "15.1.4",
+    "motion": "^12.23.26",
     "next": "15.1.9",
     "next-sanity": "^11.6.12",
     "postcss": "^8.5.1",

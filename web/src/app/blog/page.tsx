@@ -3,6 +3,7 @@ import { draftMode } from 'next/headers';
 import Image from 'next/image';
 import Link from 'next/link';
 
+import { FadeIn, MotionCard } from '@/components/motion/patterns';
 import { VisualEditingClient } from '@/components/visual-editing-client';
 import { formatPostDate } from '@/lib/date';
 import { getPosts } from '@/sanity/lib/content';
@@ -51,24 +52,28 @@ export default async function BlogIndex() {
           />
           <div className="absolute inset-0 bg-gradient-to-br from-brand-dark-light/80 via-brand-dark-light/60 to-brand-dark-light/30" />
           <div className="absolute inset-0 flex flex-col justify-end p-8 lg:p-12 gap-6">
-            <Link
-              href="/"
-              className="inline-flex items-center gap-2 text-gray-200 hover:text-white text-sm font-medium uppercase tracking-wide transition-colors"
-            >
-              <ArrowLeft className="h-4 w-4" />
-              Terug naar home
-            </Link>
-            <div>
-              <p className="text-xs uppercase tracking-[0.4em] text-white/70 mb-4">
-                Blog
-              </p>
-              <h1 className="bk-heading-hero leading-[1.05]">Lesjes uit de werkplaats</h1>
-              <p className="mt-6 max-w-lg text-base sm:text-lg text-gray-200 leading-relaxed">
-                Tech, product en ondernemerschap. Geen fluff, wél praktijk. Dit
-                is waar ik opschrijf hoe ik dingen bouw, automatiseer en
-                optimaliseer.
-              </p>
-            </div>
+            <FadeIn className="w-fit">
+              <Link
+                href="/"
+                className="inline-flex items-center gap-2 text-gray-200 hover:text-white text-sm font-medium uppercase tracking-wide transition-colors"
+              >
+                <ArrowLeft className="h-4 w-4" />
+                Terug naar home
+              </Link>
+            </FadeIn>
+            <FadeIn delay={0.08}>
+              <div>
+                <p className="text-xs uppercase tracking-[0.4em] text-white/70 mb-4">
+                  Blog
+                </p>
+                <h1 className="bk-heading-hero leading-[1.05]">Lesjes uit de werkplaats</h1>
+                <p className="mt-6 max-w-lg text-base sm:text-lg text-gray-200 leading-relaxed">
+                  Tech, product en ondernemerschap. Geen fluff, wél praktijk. Dit
+                  is waar ik opschrijf hoe ik dingen bouw, automatiseer en
+                  optimaliseer.
+                </p>
+              </div>
+            </FadeIn>
           </div>
         </div>
 
@@ -81,25 +86,26 @@ export default async function BlogIndex() {
                   <p className="font-display text-2xl text-brand-pink uppercase tracking-tight mb-4">
                     Binnenkort
                   </p>
-                  <p className="text-gray-300 text-base leading-relaxed">
-                    Nog geen artikelen gepubliceerd. Zodra je je eerste{' '}
-                    <code className="rounded bg-gray-900 px-2 py-1 text-sm text-white">
-                      .mdx
-                    </code>{' '}
+                    <p className="text-gray-300 text-base leading-relaxed">
+                      Nog geen artikelen gepubliceerd. Zodra je je eerste{' '}
+                      <code className="rounded bg-gray-900 px-2 py-1 text-sm text-white">
+                        .mdx
+                      </code>{' '}
                     bestand in <span className="font-semibold">/posts</span>{' '}
                     plaatst, verschijnt het hier.
                   </p>
                 </div>
               ) : (
-                posts.map((post) => {
+                posts.map((post, index) => {
                   const slug = stegaClean(post.slug);
                   const thumb = post.mainImage
                     ? urlFor(post.mainImage).width(360).height(200).fit('crop').url()
                     : null;
 
                   return (
-                    <article
+                    <MotionCard
                       key={slug}
+                      delay={index * 0.05}
                       className="group relative overflow-hidden rounded-2xl border border-white/10 bg-brand-dark/70 p-6 sm:p-7 ring-1 ring-white/5 hover:border-brand-pink/60 hover:ring-brand-pink/30 transition"
                     >
                       <div className="flex flex-col gap-4">
@@ -157,7 +163,7 @@ export default async function BlogIndex() {
                           )}
                         </div>
                       </div>
-                    </article>
+                    </MotionCard>
                   );
                 })
               )}

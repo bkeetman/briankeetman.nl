@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import type { SVGProps } from 'react';
 import Logo from '../../public/logo-briankeetman-nl.svg';
+import { FadeIn, ShimmerLink } from '@/components/motion/patterns';
 
 function LinkedInIcon(props: SVGProps<SVGSVGElement>) {
   return (
@@ -22,20 +23,22 @@ export default function Home() {
       {/* Text section - full width on mobile, half on desktop */}
       <div className="w-full md:w-1/2 p-8 flex flex-col items-center justify-center min-h-[50vh] md:min-h-screen">
         {/* Logo centered */}
-        <div className="mb-12">
+        <FadeIn className="mb-12">
           <Image alt="Logo" src={Logo} width={200} height={200} />
-        </div>
+        </FadeIn>
 
         {/* Text content */}
-        <div className="text-gray-200 w-full max-w-md text-center">
-          <h1 className="mb-4 bk-heading-hero tracking-[0.02em]">
-            Brian Keetman.nl
-          </h1>
-          <h2 className="mb-8 bk-heading-sub">
-            Full-stack developer & builder
-          </h2>
+        <div className="text-gray-200 w-full max-w-md text-center space-y-6">
+          <FadeIn>
+            <h1 className="mb-4 bk-heading-hero tracking-[0.02em]">
+              Brian Keetman.nl
+            </h1>
+            <h2 className="mb-6 bk-heading-sub">
+              Full-stack developer & builder
+            </h2>
+          </FadeIn>
 
-          <div className="space-y-8">
+          <FadeIn delay={0.08} className="space-y-2">
             <p className="text-base leading-relaxed text-gray-200">
               Zuidwesterringweg 34a
               <br />
@@ -49,19 +52,18 @@ export default function Home() {
               <br />
               BTW: NL004164420B26
             </p>
+          </FadeIn>
 
-            <div className="flex justify-center">
-              <a
-                className="inline-flex items-center gap-2 rounded-full border border-white/40 px-5 py-2 text-sm font-semibold uppercase tracking-wide text-white transition hover:bg-white/5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-pink"
-                href="https://www.linkedin.com/in/bkeetman"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <LinkedInIcon className="h-4 w-4" />
-                LinkedIn
-              </a>
-            </div>
-          </div>
+          <FadeIn delay={0.16} className="flex justify-center">
+            <ShimmerLink
+              href="https://www.linkedin.com/in/bkeetman"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <LinkedInIcon className="h-4 w-4" />
+              LinkedIn
+            </ShimmerLink>
+          </FadeIn>
         </div>
       </div>
 

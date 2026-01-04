@@ -1,3 +1,5 @@
+import AnimationDemos from './animation-demos';
+
 export default function StyleGuide() {
   return (
     <div className="min-h-screen text-white font-sans bk-bg-gradient">
@@ -189,6 +191,24 @@ export default function StyleGuide() {
               </pre>
             </div>
           </div>
+        </section>
+
+        <section className="space-y-4">
+          <div className="flex items-center justify-between">
+            <h3 className="font-display text-2xl tracking-tight text-brand-pink uppercase">
+              Animaties (motion.dev)
+            </h3>
+            <span className="text-[11px] uppercase tracking-[0.25em] text-gray-400">
+              Subtiel & professioneel
+            </span>
+          </div>
+          <p className="text-sm leading-relaxed text-gray-300">
+            Micro-animaties houden het strak: snelle ease-out reveals, lichte hover-lifts en
+            een subtiele glans op CTA&apos;s. Alles draait op <span className="font-semibold text-brand-pink">motion.dev</span>
+            {' '}zonder overkill.
+          </p>
+
+          <AnimationDemos />
         </section>
       </div>
     </div>

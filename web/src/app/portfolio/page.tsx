@@ -2,6 +2,7 @@ import { stegaClean } from '@sanity/client/stega';
 import Image from 'next/image';
 import Link from 'next/link';
 
+import { FadeIn, MotionCard } from '@/components/motion/patterns';
 import { formatPortfolioDate } from '@/lib/date';
 import { getPortfolioItems } from '@/sanity/lib/content';
 import { urlFor } from '@/sanity/lib/image';
@@ -48,24 +49,28 @@ export default async function PortfolioIndex() {
           />
           <div className="absolute inset-0 bg-gradient-to-br from-brand-dark/85 via-brand-dark/65 to-brand-dark/40" />
           <div className="absolute inset-0 flex flex-col justify-end p-8 lg:p-12 gap-6">
-            <Link
-              href="/"
-              className="inline-flex items-center gap-2 text-gray-200 hover:text-white text-sm font-medium uppercase tracking-wide transition-colors"
-            >
-              <ArrowLeft className="h-4 w-4" />
-              Terug naar home
-            </Link>
-            <div>
-              <p className="text-xs uppercase tracking-[0.35em] text-white/70 mb-3">
-                Portfolio
-              </p>
-              <h1 className="bk-heading-hero leading-[1.05] drop-shadow-[0_2px_12px_rgba(0,0,0,0.35)]">
-                Gerealiseerde Projecten
-              </h1>
-              <p className="mt-5 max-w-lg text-base sm:text-lg text-gray-100 leading-relaxed drop-shadow-[0_2px_10px_rgba(0,0,0,0.35)]">
-                Een overzicht van digitale producten, platforms en applicaties die ik heb ontworpen en ontwikkeld.
-              </p>
-            </div>
+            <FadeIn className="w-fit">
+              <Link
+                href="/"
+                className="inline-flex items-center gap-2 text-gray-200 hover:text-white text-sm font-medium uppercase tracking-wide transition-colors"
+              >
+                <ArrowLeft className="h-4 w-4" />
+                Terug naar home
+              </Link>
+            </FadeIn>
+            <FadeIn delay={0.08}>
+              <div>
+                <p className="text-xs uppercase tracking-[0.35em] text-white/70 mb-3">
+                  Portfolio
+                </p>
+                <h1 className="bk-heading-hero leading-[1.05] drop-shadow-[0_2px_12px_rgba(0,0,0,0.35)]">
+                  Gerealiseerde Projecten
+                </h1>
+                <p className="mt-5 max-w-lg text-base sm:text-lg text-gray-100 leading-relaxed drop-shadow-[0_2px_10px_rgba(0,0,0,0.35)]">
+                  Een overzicht van digitale producten, platforms en applicaties die ik heb ontworpen en ontwikkeld.
+                </p>
+              </div>
+            </FadeIn>
           </div>
         </div>
 
@@ -83,15 +88,16 @@ export default async function PortfolioIndex() {
                   </p>
                 </div>
               ) : (
-                items.map((item) => {
+                items.map((item, index) => {
                   const slug = stegaClean(item.slug);
                   const thumb = item.mainImage
                     ? urlFor(item.mainImage).width(360).height(200).fit('crop').url()
                     : null;
 
                   return (
-                    <article
+                    <MotionCard
                       key={slug}
+                      delay={index * 0.05}
                       className="group relative overflow-hidden rounded-2xl border border-white/10 bg-brand-dark/70 p-6 sm:p-7 ring-1 ring-white/5 hover:border-brand-pink/60 hover:ring-brand-pink/30 transition"
                     >
                       <div className="flex flex-col gap-4">
@@ -167,7 +173,7 @@ export default async function PortfolioIndex() {
                           )}
                         </div>
                       </div>
-                    </article>
+                    </MotionCard>
                   );
                 })
               )}
