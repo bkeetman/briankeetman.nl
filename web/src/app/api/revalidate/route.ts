@@ -2,12 +2,12 @@ import { revalidateTag } from 'next/cache';
 import { NextRequest, NextResponse } from 'next/server';
 
 type RevalidateBody = {
-  secret?: string;
   type?: 'post' | 'portfolio' | string;
   slug?: string;
 };
 
 export async function POST(req: NextRequest) {
+  const secretHeaderName = 'x-sanity-secret';
   const secret = process.env.SANITY_REVALIDATE_SECRET;
   if (!secret) {
     console.error('Revalidate request rejected: missing SANITY_REVALIDATE_SECRET');
@@ -17,16 +17,11 @@ export async function POST(req: NextRequest) {
     );
   }
 
-  const body = (await req.json().catch(() => null)) as RevalidateBody | null;
-  if (!body) {
-    console.warn('Revalidate request rejected: unable to parse body');
-  }
-  if (!body || body.secret !== secret) {
-    console.warn('Revalidate request rejected: invalid secret', {
-      hasBody: Boolean(body),
-      type: body?.type,
-      slug: body?.slug,
-      hasSecret: Boolean(body?.secret),
+  const providedSecret = req.headers.get(secretHeaderName);
+  if (!providedSecret || providedSecret !== secret) {
+    console.warn('Revalidate request rejected: invalid or missing header secret', {
+      hasHeader: Boolean(providedSecret),
+      headerName: secretHeaderName,
     });
     return NextResponse.json(
       { ok: false, message: 'Invalid secret' },
@@ -34,9 +29,19 @@ export async function POST(req: NextRequest) {
     );
   }
 
+  const body = (await req.json().catch(() => null)) as RevalidateBody | null;
+  if (!body) {
+    console.warn('Revalidate request rejected: unable to parse body');
+    return NextResponse.json(
+      { ok: false, message: 'Invalid body' },
+      { status: 400 }
+    );
+  }
+
   console.info('Revalidate request accepted', {
     type: body.type,
     slug: body.slug,
+    auth: 'header',
   });
 
   const tags = new Set<string>();
