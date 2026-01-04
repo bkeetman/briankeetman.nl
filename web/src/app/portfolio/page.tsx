@@ -39,8 +39,8 @@ export default async function PortfolioIndex() {
         {/* Hero */}
         <div className="relative w-full lg:w-1/2 h-[40vh] lg:h-screen flex-shrink-0">
           <Image
-            src="/background.webp"
-            alt="Brian Keetman"
+            src="/portfolio/farmtrade/diner-cow.png"
+            alt="Cow Siner illustration"
             fill
             className="object-cover"
             sizes="(max-width: 1024px) 100vw, 50vw"
