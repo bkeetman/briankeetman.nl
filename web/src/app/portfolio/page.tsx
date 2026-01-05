@@ -98,7 +98,7 @@ export default async function PortfolioIndex() {
                     <MotionCard
                       key={slug}
                       delay={index * 0.05}
-                      className="group relative overflow-hidden rounded-2xl border border-white/10 bg-brand-dark/70 p-6 sm:p-7 ring-1 ring-white/5 hover:border-brand-pink/60 hover:ring-brand-pink/30 transition"
+                      className="group relative overflow-hidden rounded-2xl border border-white/10 bg-brand-dark/70 p-6 sm:p-7 ring-1 ring-white/5 hover:border-brand-pink/60 hover:ring-brand-pink/30 transition-[border-color,box-shadow] duration-200"
                     >
                       <div className="flex flex-col gap-4">
                         <div className="flex items-center gap-3 text-[11px] font-semibold uppercase tracking-[0.3em] text-gray-400">

@@ -1,7 +1,9 @@
 'use client';
 
 import type { ReactNode } from 'react';
-import { motion, type HTMLMotionProps } from 'motion/react';
+import { motion, type HTMLMotionProps, type Transition } from 'motion/react';
+
+const revealEase = [0.22, 1, 0.36, 1] as const;
 
 type FadeInProps = {
   children: ReactNode;
@@ -16,7 +18,7 @@ export function FadeIn({ children, delay = 0, className }: FadeInProps) {
       initial={{ opacity: 0, y: 14 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: '-12%' }}
-      transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1], delay }}
+      transition={{ duration: 0.6, ease: revealEase, delay, type: 'tween' }}
     >
       {children}
     </motion.div>
@@ -36,23 +38,39 @@ export function MotionCard({
   glow = false,
   ...rest
 }: MotionCardProps) {
+  const revealTransition: Transition = {
+    duration: 0.7,
+    ease: revealEase,
+    delay,
+    type: 'tween',
+  };
+  const hoverTransition: Transition = {
+    duration: 0.25,
+    ease: revealEase,
+    type: 'tween',
+  };
+
   return (
     <motion.article
       {...rest}
       className={`relative overflow-hidden ${className}`}
-      initial={{ opacity: 0, y: 18 }}
+      initial={{ opacity: 0, y: 8 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: '-10%' }}
-      whileHover={{ y: -6, scale: 1.01 }}
+      whileHover={{
+        y: -2,
+        scale: 1.002,
+        transition: hoverTransition,
+      }}
       whileTap={{ scale: 0.995 }}
-      transition={{ duration: 0.55, ease: [0.25, 1, 0.5, 1], delay }}
+      transition={revealTransition}
     >
       {glow ? (
         <motion.div
           className="pointer-events-none absolute inset-0 rounded-[18px] bg-gradient-to-br from-brand-pink/15 via-transparent to-cyan-300/10"
           initial={{ opacity: 0 }}
           whileHover={{ opacity: 1 }}
-          transition={{ duration: 0.4, ease: 'easeOut' }}
+          transition={{ duration: 0.4, ease: revealEase, type: 'tween' }}
         />
       ) : null}
       {children}
