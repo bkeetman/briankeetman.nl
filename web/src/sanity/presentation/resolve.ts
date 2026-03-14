@@ -1,3 +1,4 @@
+import { stegaClean } from '@sanity/client/stega';
 import { defineLocations, type PresentationPluginOptions } from 'sanity/presentation';
 
 export const resolve: PresentationPluginOptions['resolve'] = {
@@ -32,6 +33,20 @@ export const resolve: PresentationPluginOptions['resolve'] = {
         ].filter((location): location is { title: string; href: string } => Boolean(location)),
       }),
     }),
+    project: defineLocations({
+      select: { title: 'title', slug: 'slug.current', _id: '_id' },
+      resolve: (doc) => ({
+        documentId: doc?._id,
+        locations: [
+          doc?.slug
+            ? {
+                title: doc?.title || 'Project',
+                href: `/projects/${stegaClean(doc.slug)}`,
+              }
+            : undefined,
+          { title: 'Projecten overzicht', href: '/projects' },
+        ].filter((location): location is { title: string; href: string } => Boolean(location)),
+      }),
+    }),
   },
 };
-import { stegaClean } from '@sanity/client/stega';

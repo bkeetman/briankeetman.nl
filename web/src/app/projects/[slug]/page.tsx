@@ -1,3 +1,4 @@
+import type React from 'react';
 import type { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -279,10 +280,11 @@ export default async function ProjectPage({ params }: PageProps) {
 
                 {/* Content */}
                 <div
+                  style={{ '--project-accent': theme.accent } as React.CSSProperties}
                   className="prose prose-invert prose-lg sm:prose-xl max-w-none
                     prose-headings:font-bold prose-headings:tracking-tight
                     prose-h1:text-3xl prose-h1:mt-12 prose-h1:mb-6 prose-h1:text-white prose-h1:font-display prose-h1:uppercase
-                    prose-h2:text-2xl prose-h2:mt-10 prose-h2:mb-5 prose-h2:text-brand-pink prose-h2:font-display prose-h2:uppercase
+                    prose-h2:text-2xl prose-h2:mt-10 prose-h2:mb-5 prose-h2:font-display prose-h2:uppercase [&_h2]:text-[var(--project-accent)]
                     prose-h3:text-xl prose-h3:mt-8 prose-h3:mb-4 prose-h3:text-white prose-h3:font-sans
                     prose-p:text-gray-300 prose-p:text-base prose-p:leading-relaxed prose-p:my-5
                     prose-li:text-gray-300 prose-li:my-1 prose-li:text-base
