@@ -10,11 +10,11 @@ export type ProjectTheme = {
 
 const themes: Record<string, ProjectTheme> = {
   dingetje: {
-    accent: '#f97316',
-    accentMuted: 'rgba(249,115,22,0.12)',
-    cardBg: '#1e1008',
+    accent: '#7c3aed',
+    accentMuted: 'rgba(124,58,237,0.15)',
+    cardBg: '#1a0d26',
     fontFamily: 'var(--font-geist-sans), system-ui, sans-serif',
-    textMuted: 'rgba(255,255,255,0.55)',
+    textMuted: '#a3a3a3',
     logo: '/projects/dingetje-logo.png',
     logoAlt: 'Dingetje logo',
   },
