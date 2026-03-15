@@ -42,13 +42,14 @@ export function ProjectCard({
       delay={delay}
       className="group relative overflow-hidden rounded-2xl border transition-[border-color,box-shadow] duration-200"
       style={{
+        backgroundColor: theme.cardBg,
         borderColor: hovered
-          ? `color-mix(in srgb, ${theme.accent} 60%, transparent)`
-          : `color-mix(in srgb, ${theme.accent} 25%, transparent)`,
-        backgroundColor: theme.accentMuted,
+          ? `color-mix(in srgb, ${theme.accent} 50%, transparent)`
+          : `color-mix(in srgb, ${theme.accent} 20%, transparent)`,
         boxShadow: hovered
-          ? `0 0 24px color-mix(in srgb, ${theme.accent} 20%, transparent)`
+          ? `0 0 32px color-mix(in srgb, ${theme.accent} 18%, transparent)`
           : 'none',
+        fontFamily: theme.fontFamily,
       }}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
@@ -56,11 +57,14 @@ export function ProjectCard({
       <div className="p-6 sm:p-7 flex flex-col gap-4">
         {/* Logo + meta row */}
         <div className="flex items-center justify-between">
-          <div className="flex items-center gap-3 text-[11px] font-semibold uppercase tracking-[0.3em] text-gray-400">
+          <div
+            className="flex items-center gap-3 text-[11px] font-semibold uppercase tracking-[0.3em]"
+            style={{ color: theme.textMuted }}
+          >
             <span style={{ color: theme.accent }}>{dateLabel}</span>
             {status && (
               <>
-                <span className="text-gray-600">•</span>
+                <span style={{ color: `color-mix(in srgb, ${theme.textMuted} 50%, transparent)` }}>•</span>
                 <span>{status}</span>
               </>
             )}
@@ -71,18 +75,20 @@ export function ProjectCard({
               alt={theme.logoAlt ?? title}
               width={48}
               height={48}
-              className="rounded-lg opacity-90"
+              className="rounded-lg"
             />
           )}
         </div>
 
         {/* Title + description */}
         <div>
-          <h2 className="bk-heading-sub text-3xl sm:text-4xl mb-3 leading-[1.05]" style={{ color: 'white' }}>
+          <h2 className="font-display text-3xl sm:text-4xl mb-3 leading-[1.05] uppercase tracking-tight text-white">
             <Link href={`/projects/${slug}`}>{title}</Link>
           </h2>
           {description && (
-            <p className="text-gray-200 text-base leading-relaxed">{description}</p>
+            <p className="text-base leading-relaxed" style={{ color: theme.textMuted }}>
+              {description}
+            </p>
           )}
           {technologies && technologies.length > 0 && (
             <div className="flex flex-wrap gap-2 mt-4">
@@ -121,7 +127,8 @@ export function ProjectCard({
                 href={website}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1 text-gray-400 hover:text-white transition-colors"
+                className="inline-flex items-center gap-1 transition-colors hover:text-white"
+                style={{ color: theme.textMuted }}
               >
                 <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/>
@@ -131,7 +138,7 @@ export function ProjectCard({
             )}
           </div>
           {thumb && (
-            <div className="relative h-16 w-28 overflow-hidden rounded-xl border border-white/10">
+            <div className="relative h-16 w-28 overflow-hidden rounded-xl" style={{ border: `1px solid color-mix(in srgb, ${theme.accent} 20%, transparent)` }}>
               <Image
                 src={thumb}
                 alt={title}

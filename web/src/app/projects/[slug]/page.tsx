@@ -184,7 +184,10 @@ export default async function ProjectPage({ params }: PageProps) {
         </div>
 
         {/* Rechter helft: Content */}
-        <div className="w-full lg:w-1/2 bg-transparent flex-shrink-0 overflow-y-auto">
+        <div
+          className="w-full lg:w-1/2 flex-shrink-0 overflow-y-auto"
+          style={{ backgroundColor: theme.cardBg, fontFamily: theme.fontFamily }}
+        >
           <div className="px-6 sm:px-8 lg:px-20 xl:px-24 py-12 sm:py-16 lg:py-20 xl:py-24">
             <div className="max-w-2xl mx-auto">
               {/* Desktop: Back button */}
@@ -237,7 +240,7 @@ export default async function ProjectPage({ params }: PageProps) {
                   </h1>
 
                   {item.description && (
-                    <p className="text-gray-200 text-lg md:text-xl leading-relaxed mb-8">
+                    <p className="text-lg md:text-xl leading-relaxed mb-8" style={{ color: theme.textMuted }}>
                       {item.description}
                     </p>
                   )}

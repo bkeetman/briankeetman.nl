@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { Bebas_Neue, Inter } from 'next/font/google';
+import { GeistSans } from 'geist/font/sans';
 
 import './globals.css';
 
@@ -28,7 +29,7 @@ export default function RootLayout({
   return (
     <html suppressHydrationWarning={true} lang="nl" className="dark">
       <body
-        className={`${inter.variable} ${bebasNeue.variable} font-sans min-h-screen text-white bk-bg-gradient`}
+        className={`${inter.variable} ${bebasNeue.variable} ${GeistSans.variable} font-sans min-h-screen text-white bk-bg-gradient`}
       >
         {children}
       </body>
