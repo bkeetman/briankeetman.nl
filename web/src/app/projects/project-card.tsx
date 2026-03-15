@@ -69,9 +69,9 @@ export function ProjectCard({
             <Image
               src={theme.logo}
               alt={theme.logoAlt ?? title}
-              width={32}
-              height={32}
-              className="rounded-md opacity-90"
+              width={48}
+              height={48}
+              className="rounded-lg opacity-90"
             />
           )}
         </div>

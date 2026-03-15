@@ -221,13 +221,13 @@ export default async function ProjectPage({ params }: PageProps) {
                   </div>
 
                   {theme.logo && (
-                    <div className="flex items-center gap-3 mb-4">
+                    <div className="mb-6">
                       <Image
                         src={theme.logo}
                         alt={theme.logoAlt ?? item.title}
-                        width={40}
-                        height={40}
-                        className="rounded-lg"
+                        width={80}
+                        height={80}
+                        className="rounded-xl"
                       />
                     </div>
                   )}
