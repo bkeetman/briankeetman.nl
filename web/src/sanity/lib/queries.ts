@@ -85,3 +85,39 @@ export const PORTFOLIO_SLUGS_QUERY = defineQuery(/* groq */ `
     "slug": slug.current
   }
 `);
+
+export const PROJECTS_QUERY = defineQuery(/* groq */ `
+  *[_type == "project" && defined(slug.current)]
+    | order(coalesce(startedAt, _createdAt) desc){
+      _id,
+      title,
+      "slug": slug.current,
+      description,
+      status,
+      startedAt,
+      technologies,
+      website,
+      ${imageFields}
+    }
+`);
+
+export const PROJECT_QUERY = defineQuery(/* groq */ `
+  *[_type == "project" && slug.current == $slug][0]{
+    _id,
+    title,
+    "slug": slug.current,
+    description,
+    status,
+    startedAt,
+    technologies,
+    website,
+    body,
+    ${imageFields}
+  }
+`);
+
+export const PROJECT_SLUGS_QUERY = defineQuery(/* groq */ `
+  *[_type == "project" && defined(slug.current)]{
+    "slug": slug.current
+  }
+`);

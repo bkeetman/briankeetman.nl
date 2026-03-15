@@ -39,3 +39,16 @@ export type PortfolioItem = {
   mainImage?: SanityImageWithMetadata;
   body?: PortableTextBlock[];
 };
+
+export type Project = {
+  _id: string;
+  title: string;
+  slug: string;
+  description?: string;
+  status?: string;
+  startedAt?: string;
+  technologies?: string[];
+  website?: string;
+  mainImage?: SanityImageWithMetadata;
+  body?: PortableTextBlock[];
+};

@@ -18,3 +18,12 @@ export function formatPortfolioDate(dateString: string) {
     return dateString;
   }
 }
+
+export function formatProjectDate(dateString: string) {
+  try {
+    const date = new Date(dateString);
+    return format(date, 'MMMM yyyy', { locale: nl });
+  } catch {
+    return dateString;
+  }
+}

@@ -64,6 +64,15 @@ export default function Home() {
               LinkedIn
             </ShimmerLink>
           </FadeIn>
+
+          <FadeIn delay={0.24} className="flex flex-col items-center gap-3">
+            <p className="text-sm leading-relaxed text-gray-400">
+              Lopende tools en experimenten.
+            </p>
+            <ShimmerLink href="/projects" pulse={false}>
+              Bekijk projecten
+            </ShimmerLink>
+          </FadeIn>
         </div>
       </div>
 

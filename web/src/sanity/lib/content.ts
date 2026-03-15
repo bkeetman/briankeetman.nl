@@ -6,8 +6,11 @@ import {
   POST_QUERY,
   POSTS_QUERY,
   POST_SLUGS_QUERY,
+  PROJECT_QUERY,
+  PROJECTS_QUERY,
+  PROJECT_SLUGS_QUERY,
 } from './queries';
-import type { PortfolioItem, Post } from '../types';
+import type { PortfolioItem, Post, Project } from '../types';
 
 export async function getPosts(options?: { stega?: boolean }) {
   const data = await sanityFetch<Post[]>({
@@ -67,6 +70,38 @@ export async function getPortfolioItemBySlug(
 export async function getPortfolioSlugs() {
   const data = await sanityFetch<Array<{ slug: string }>>({
     query: PORTFOLIO_SLUGS_QUERY,
+    stega: false,
+    perspective: 'published',
+  });
+  return data ?? [];
+}
+
+export async function getProjects(options?: { stega?: boolean }) {
+  const data = await sanityFetch<Project[]>({
+    query: PROJECTS_QUERY,
+    stega: options?.stega,
+    tags: ['project'],
+  });
+  return data ?? [];
+}
+
+export async function getProjectBySlug(
+  slug: string,
+  options?: { stega?: boolean; perspective?: 'published' | 'previewDrafts' }
+) {
+  const data = await sanityFetch<Project>({
+    query: PROJECT_QUERY,
+    params: { slug },
+    stega: options?.stega,
+    perspective: options?.perspective,
+    tags: ['project', `project:${slug}`],
+  });
+  return data;
+}
+
+export async function getProjectSlugs() {
+  const data = await sanityFetch<Array<{ slug: string }>>({
+    query: PROJECT_SLUGS_QUERY,
     stega: false,
     perspective: 'published',
   });

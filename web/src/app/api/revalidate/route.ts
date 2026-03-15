@@ -2,7 +2,7 @@ import { revalidateTag } from 'next/cache';
 import { NextRequest, NextResponse } from 'next/server';
 
 type RevalidateBody = {
-  type?: 'post' | 'portfolio' | string;
+  type?: 'post' | 'portfolio' | 'project' | string;
   slug?: string;
 };
 
@@ -52,10 +52,14 @@ export async function POST(req: NextRequest) {
   } else if (body.type === 'portfolio') {
     tags.add('portfolio');
     if (body.slug) tags.add(`portfolio:${body.slug}`);
+  } else if (body.type === 'project') {
+    tags.add('project');
+    if (body.slug) tags.add(`project:${body.slug}`);
   } else {
     // fallback: revalidate everything we tag
     tags.add('post');
     tags.add('portfolio');
+    tags.add('project');
   }
 
   const tagsList = Array.from(tags);
