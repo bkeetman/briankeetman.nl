@@ -144,13 +144,13 @@ export default async function ProjectPage({ params }: PageProps) {
 
       <div className="flex flex-col lg:flex-row min-h-screen">
         {/* Linker helft: Image (sticky op desktop) */}
-        <div className="w-full lg:w-1/2 h-[40vh] lg:h-screen relative lg:sticky lg:top-0 flex-shrink-0">
+        <div className="w-full lg:w-1/2 h-[40vh] lg:h-screen relative lg:sticky lg:top-0 flex-shrink-0 bg-brand-dark">
           {heroImage ? (
             <Image
               src={heroImage}
               alt={item.mainImage?.alt || item.title}
               fill
-              className="object-cover"
+              className="object-contain"
               sizes="(max-width: 1024px) 100vw, 50vw"
               priority
               placeholder={heroLqip ? 'blur' : 'empty'}
