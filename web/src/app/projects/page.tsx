@@ -2,11 +2,12 @@ import { stegaClean } from '@sanity/client/stega';
 import Image from 'next/image';
 import Link from 'next/link';
 
-import { FadeIn, MotionCard } from '@/components/motion/patterns';
+import { FadeIn } from '@/components/motion/patterns';
 import { formatProjectDate } from '@/lib/date';
 import { getProjectTheme } from '@/lib/projectThemes';
 import { getProjects } from '@/sanity/lib/content';
 import { urlFor } from '@/sanity/lib/image';
+import { ProjectCard } from './project-card';
 
 const ArrowLeft = ({ className }: { className?: string }) => (
   <svg
@@ -117,114 +118,20 @@ export default async function ProjectsIndex() {
                   const theme = getProjectTheme(slug);
 
                   return (
-                    <MotionCard
+                    <ProjectCard
                       key={slug}
+                      slug={slug}
+                      title={item.title}
+                      description={item.description}
+                      dateLabel={dateLabel}
+                      status={status}
+                      technologies={item.technologies}
+                      website={item.website}
+                      thumb={thumb}
+                      mainImage={item.mainImage}
+                      theme={theme}
                       delay={index * 0.05}
-                      className="group relative overflow-hidden rounded-2xl border transition-[border-color,box-shadow] duration-200"
-                      style={{
-                        borderColor: `color-mix(in srgb, ${theme.accent} 25%, transparent)`,
-                        backgroundColor: theme.accentMuted,
-                      }}
-                      onMouseEnter={(e) => {
-                        (e.currentTarget as HTMLElement).style.borderColor = `color-mix(in srgb, ${theme.accent} 60%, transparent)`;
-                        (e.currentTarget as HTMLElement).style.boxShadow = `0 0 24px color-mix(in srgb, ${theme.accent} 20%, transparent)`;
-                      }}
-                      onMouseLeave={(e) => {
-                        (e.currentTarget as HTMLElement).style.borderColor = `color-mix(in srgb, ${theme.accent} 25%, transparent)`;
-                        (e.currentTarget as HTMLElement).style.boxShadow = 'none';
-                      }}
-                    >
-                      <div className="p-6 sm:p-7 flex flex-col gap-4">
-                        {/* Logo + meta row */}
-                        <div className="flex items-center justify-between">
-                          <div className="flex items-center gap-3 text-[11px] font-semibold uppercase tracking-[0.3em] text-gray-400">
-                            <span style={{ color: theme.accent }}>{dateLabel}</span>
-                            {status && (
-                              <>
-                                <span className="text-gray-600">•</span>
-                                <span>{status}</span>
-                              </>
-                            )}
-                          </div>
-                          {theme.logo && (
-                            <Image
-                              src={theme.logo}
-                              alt={theme.logoAlt ?? item.title}
-                              width={32}
-                              height={32}
-                              className="rounded-md opacity-90"
-                            />
-                          )}
-                        </div>
-
-                        {/* Title + description */}
-                        <div>
-                          <h2
-                            className="bk-heading-sub text-3xl sm:text-4xl mb-3 leading-[1.05] transition-colors group-hover:text-white"
-                            style={{ color: 'white' }}
-                          >
-                            <Link href={`/projects/${slug}`}>{item.title}</Link>
-                          </h2>
-                          {item.description && (
-                            <p className="text-gray-200 text-base leading-relaxed">{item.description}</p>
-                          )}
-                          {item.technologies && item.technologies.length > 0 && (
-                            <div className="flex flex-wrap gap-2 mt-4">
-                              {item.technologies.map((tech) => (
-                                <span
-                                  key={tech}
-                                  className="text-xs uppercase tracking-wider px-2 py-1 rounded"
-                                  style={{
-                                    backgroundColor: `color-mix(in srgb, ${theme.accent} 12%, transparent)`,
-                                    color: theme.accent,
-                                    border: `1px solid color-mix(in srgb, ${theme.accent} 30%, transparent)`,
-                                  }}
-                                >
-                                  {tech}
-                                </span>
-                              ))}
-                            </div>
-                          )}
-                        </div>
-
-                        {/* Footer row: links + thumbnail */}
-                        <div className="flex items-center justify-between pt-3 text-sm font-semibold uppercase tracking-wide">
-                          <div className="flex items-center gap-4">
-                            <Link
-                              href={`/projects/${slug}`}
-                              className="inline-flex items-center gap-2 transition-colors hover:text-white"
-                              style={{ color: theme.accent }}
-                            >
-                              Bekijk project
-                              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-4 w-4">
-                                <path d="M5 12h14"/><path d="m12 5 7 7-7 7"/>
-                              </svg>
-                            </Link>
-                            {item.website && (
-                              <a
-                                href={item.website}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="inline-flex items-center gap-1 text-gray-400 hover:text-white transition-colors"
-                              >
-                                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                                  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/>
-                                </svg>
-                                Bezoek
-                              </a>
-                            )}
-                          </div>
-                          {thumb && (
-                            <div className="relative h-16 w-28 overflow-hidden rounded-xl border border-white/10">
-                              <Image src={thumb} alt={item.title} fill className="object-cover" sizes="112px"
-                                placeholder={item.mainImage?.asset?.metadata?.lqip ? 'blur' : 'empty'}
-                                blurDataURL={item.mainImage?.asset?.metadata?.lqip}
-                              />
-                            </div>
-                          )}
-                        </div>
-                      </div>
-                    </MotionCard>
+                    />
                   );
                 })
               )}
