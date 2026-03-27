@@ -2,6 +2,7 @@ import { stegaClean } from '@sanity/client/stega';
 import Image from 'next/image';
 import Link from 'next/link';
 
+import { CardShowcaseRail } from '@/components/card-showcase-rail';
 import { FadeIn, MotionCard } from '@/components/motion/patterns';
 import { formatPortfolioDate } from '@/lib/date';
 import { getPortfolioItems } from '@/sanity/lib/content';
@@ -30,6 +31,10 @@ export const metadata = {
   description:
     'Een selectie van recente projecten, producten en samenwerkingen.',
 };
+
+const portfolioAccent = '#d5147b';
+const portfolioAccentMuted = 'rgba(213,20,123,0.14)';
+const portfolioMutedText = '#c1c7d0';
 
 export default async function PortfolioIndex() {
   const items = await getPortfolioItems();
@@ -101,77 +106,55 @@ export default async function PortfolioIndex() {
                       className="group relative overflow-hidden rounded-2xl border border-white/10 bg-brand-dark/70 p-6 sm:p-7 ring-1 ring-white/5 hover:border-brand-pink/60 hover:ring-brand-pink/30 transition-[border-color,box-shadow] duration-200"
                     >
                       <div className="flex flex-col gap-4">
-                        <div className="flex items-center gap-3 text-[11px] font-semibold uppercase tracking-[0.3em] text-gray-400">
-                          <span className="text-brand-pink">
-                            {formatPortfolioDate(item.date || '')}
-                          </span>
-                          {item.client && (
-                            <>
-                              <span className="text-gray-600">•</span>
-                              <span>{item.client}</span>
-                            </>
-                          )}
+                        <div className="flex flex-col gap-4">
+                          <div className="flex items-center gap-3 text-[11px] font-semibold uppercase tracking-[0.3em] text-gray-400">
+                            <span className="text-brand-pink">
+                              {formatPortfolioDate(item.date || '')}
+                            </span>
+                            {item.client && (
+                              <>
+                                <span className="text-gray-600">•</span>
+                                <span>{item.client}</span>
+                              </>
+                            )}
+                          </div>
+                          <div>
+                            <h2 className="bk-heading-sub text-3xl leading-[1.02] transition-colors group-hover:text-brand-pink sm:text-4xl">
+                              <Link href={`/portfolio/${slug}`}>{item.title}</Link>
+                            </h2>
+                            {item.description && (
+                              <p className="mt-4 text-base leading-relaxed text-gray-200 sm:text-[1.05rem]">
+                                {item.description}
+                              </p>
+                            )}
+                            {item.technologies && item.technologies.length > 0 && (
+                              <div className="mt-5 flex flex-wrap gap-2">
+                                {item.technologies.map((tech) => (
+                                  <span
+                                    key={tech}
+                                    className="rounded-xl border border-white/10 bg-white/5 px-3 py-1.5 text-xs uppercase tracking-[0.24em] text-gray-200"
+                                  >
+                                    {tech}
+                                  </span>
+                                ))}
+                              </div>
+                            )}
+                          </div>
                         </div>
-                        <div>
-                        <h2 className="bk-heading-sub text-3xl sm:text-4xl mb-3 leading-[1.05] group-hover:text-brand-pink transition-colors">
-                          <Link href={`/portfolio/${slug}`}>{item.title}</Link>
-                        </h2>
-                          {item.description && (
-                            <p className="text-gray-200 text-base leading-relaxed">
-                              {item.description}
-                            </p>
-                          )}
-                          {item.technologies && item.technologies.length > 0 && (
-                            <div className="flex flex-wrap gap-2 mt-4">
-                              {item.technologies.map((tech) => (
-                                <span
-                                  key={tech}
-                                  className="text-xs uppercase tracking-wider bg-white/10 text-gray-300 px-2 py-1 rounded"
-                                >
-                                  {tech}
-                                </span>
-                              ))}
-                            </div>
-                          )}
-                        </div>
-                        <div className="flex items-center justify-between pt-3 text-sm font-semibold uppercase tracking-wide">
-                          <Link
-                            href={`/portfolio/${slug}`}
-                            className="inline-flex items-center gap-2 text-brand-pink hover:text-white transition-colors"
-                          >
-                            Bekijk project
-                            <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              width="16"
-                              height="16"
-                              viewBox="0 0 24 24"
-                              fill="none"
-                              stroke="currentColor"
-                              strokeWidth="2"
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              className="h-4 w-4"
-                            >
-                              <path d="M5 12h14" />
-                              <path d="m12 5 7 7-7 7" />
-                            </svg>
-                          </Link>
-                          {thumb && (
-                            <div className="relative h-16 w-28 overflow-hidden rounded-xl border border-white/10">
-                              <Image
-                                src={thumb}
-                                alt={item.title}
-                                fill
-                                className="object-cover"
-                                sizes="112px"
-                                placeholder={
-                                  item.mainImage?.asset?.metadata?.lqip ? 'blur' : 'empty'
-                                }
-                                blurDataURL={item.mainImage?.asset?.metadata?.lqip}
-                              />
-                            </div>
-                          )}
-                        </div>
+
+                        <CardShowcaseRail
+                          title={item.title}
+                          accent={portfolioAccent}
+                          accentMuted={portfolioAccentMuted}
+                          mutedText={portfolioMutedText}
+                          thumb={thumb}
+                          blurDataURL={item.mainImage?.asset?.metadata?.lqip}
+                          primaryHref={`/portfolio/${slug}`}
+                          primaryLabel="Bekijk project"
+                          secondaryHref={item.website}
+                          secondaryLabel={item.website ? 'Bezoek' : undefined}
+                          secondaryExternal={true}
+                        />
                       </div>
                     </MotionCard>
                   );
