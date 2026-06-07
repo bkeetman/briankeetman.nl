@@ -3,7 +3,6 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 import { FadeIn } from '@/components/motion/patterns';
-import { formatProjectDate } from '@/lib/date';
 import { getProjectTheme } from '@/lib/projectThemes';
 import { getProjects } from '@/sanity/lib/content';
 import { urlFor } from '@/sanity/lib/image';
@@ -45,7 +44,7 @@ const statusLabel = (status?: string) => {
 export const metadata = {
   title: 'Projecten | Brian Keetman',
   description:
-    'Lopende projecten, experimenten en ideeën in ontwikkeling.',
+    'Projecten, tools en digitale producten in ontwikkeling.',
 };
 
 export default async function ProjectsIndex() {
@@ -55,7 +54,7 @@ export default async function ProjectsIndex() {
     <div className="min-h-screen bk-bg-gradient">
       <div className="flex flex-col lg:flex-row min-h-screen">
         {/* Hero */}
-        <div className="relative w-full lg:w-1/2 h-[40vh] lg:h-screen flex-shrink-0">
+        <div className="relative w-full lg:w-1/2 min-h-[72svh] lg:min-h-screen flex-shrink-0 overflow-hidden">
           <Image
             src="/background-ufo.webp"
             alt="Brian met robot"
@@ -65,7 +64,7 @@ export default async function ProjectsIndex() {
             priority
           />
           <div className="absolute inset-0 bg-gradient-to-br from-brand-dark/80 via-brand-dark/60 to-brand-dark/30" />
-          <div className="absolute inset-0 flex flex-col justify-end p-8 lg:p-12 gap-6">
+          <div className="relative z-10 flex min-h-[72svh] flex-col justify-end gap-6 p-8 lg:min-h-screen lg:p-12">
             <FadeIn className="w-fit">
               <Link
                 href="/"
@@ -81,11 +80,11 @@ export default async function ProjectsIndex() {
                   Projecten
                 </p>
                 <h1 className="bk-heading-hero leading-[1.05] drop-shadow-[0_2px_12px_rgba(0,0,0,0.35)]">
-                  Lopende Bouwstenen
+                  Projecten In Ontwikkeling
                 </h1>
                 <p className="mt-5 max-w-lg text-base sm:text-lg text-gray-100 leading-relaxed drop-shadow-[0_2px_10px_rgba(0,0,0,0.35)]">
-                  Experimenten, tools en ideeën waar ik momenteel aan werk. Hier vind je
-                  context, updates en later ook handleidingen of downloads.
+                  Tools, experimenten en digitale producten waar ik actief aan
+                  werk. Kort, concreet en met ruimte voor updates.
                 </p>
               </div>
             </FadeIn>
@@ -93,9 +92,9 @@ export default async function ProjectsIndex() {
         </div>
 
         {/* List */}
-        <div className="w-full lg:w-1/2 bg-transparent flex-shrink-0 overflow-y-auto">
+        <div className="w-full lg:w-1/2 bg-brand-dark/20 flex-shrink-0 overflow-y-auto">
           <div className="px-6 sm:px-8 lg:px-20 xl:px-24 py-12 sm:py-16 lg:py-20 xl:py-24">
-            <div className="max-w-2xl mx-auto space-y-8">
+            <div className="max-w-2xl mx-auto space-y-6">
               {items.length === 0 ? (
                 <div className="rounded-2xl border border-white/10 bg-white/5 px-6 py-10 text-center">
                   <p className="font-display text-2xl text-brand-pink uppercase tracking-tight mb-4">
@@ -112,9 +111,6 @@ export default async function ProjectsIndex() {
                     ? urlFor(item.mainImage).width(360).height(200).fit('crop').url()
                     : null;
                   const status = statusLabel(item.status);
-                  const dateLabel = item.startedAt
-                    ? formatProjectDate(item.startedAt)
-                    : 'Lopend';
                   const theme = getProjectTheme(slug);
 
                   return (
@@ -123,7 +119,6 @@ export default async function ProjectsIndex() {
                       slug={slug}
                       title={item.title}
                       description={item.description}
-                      dateLabel={dateLabel}
                       status={status}
                       technologies={item.technologies}
                       website={item.website}
