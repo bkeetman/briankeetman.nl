@@ -67,11 +67,16 @@ export default function Home() {
 
           <FadeIn delay={0.24} className="flex flex-col items-center gap-3">
             <p className="text-sm leading-relaxed text-gray-400">
-              Lopende tools en experimenten.
+              Websites, webapplicaties en lopende tools.
             </p>
-            <ShimmerLink href="/projects" pulse={false}>
-              Bekijk projecten
-            </ShimmerLink>
+            <div className="flex flex-wrap items-center justify-center gap-3">
+              <ShimmerLink href="/diensten" pulse={false}>
+                Bekijk diensten
+              </ShimmerLink>
+              <ShimmerLink href="/projects" pulse={false}>
+                Bekijk projecten
+              </ShimmerLink>
+            </div>
           </FadeIn>
         </div>
       </div>
