@@ -8,7 +8,6 @@ import { Button } from '@/components/ui/button';
 import { formatPortfolioDate } from '@/lib/date';
 import {
   getPortfolioItemBySlug,
-  getPortfolioItems,
   getPortfolioSlugs,
 } from '@/sanity/lib/content';
 import { urlFor } from '@/sanity/lib/image';

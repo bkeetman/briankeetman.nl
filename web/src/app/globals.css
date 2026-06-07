@@ -1,6 +1,5 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+@config "../../tailwind.config.js";
 
 :root {
   --font-inter: var(--font-inter);
@@ -9,28 +8,87 @@
 
 @layer components {
   .bk-heading-hero {
-    @apply font-display text-brand-pink uppercase tracking-hero leading-[1.05] text-4xl sm:text-5xl lg:text-6xl xl:text-7xl;
+    color: #d5147b;
+    font-family: var(--font-bebas-neue), system-ui, sans-serif;
+    font-size: 2.25rem;
+    line-height: 1.05;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
   }
 
   .bk-heading-sub {
-    @apply font-display uppercase tracking-hero text-white leading-[1.05] text-2xl md:text-3xl;
+    color: #fff;
+    font-family: var(--font-bebas-neue), system-ui, sans-serif;
+    font-size: 1.5rem;
+    line-height: 1.05;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
   }
 
   /* Semantic defaults for content */
   h1 {
-    @apply bk-heading-hero;
+    color: #d5147b;
+    font-family: var(--font-bebas-neue), system-ui, sans-serif;
+    font-size: 2.25rem;
+    line-height: 1.05;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
   }
 
   h2 {
-    @apply font-display uppercase tracking-hero text-brand-pink leading-[1.08] text-3xl md:text-4xl;
+    color: #d5147b;
+    font-family: var(--font-bebas-neue), system-ui, sans-serif;
+    font-size: 1.875rem;
+    line-height: 1.08;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
   }
 
   h3 {
-    @apply font-sans font-semibold text-brand-pink text-2xl leading-tight;
+    color: #d5147b;
+    font-family: var(--font-inter), system-ui, sans-serif;
+    font-size: 1.5rem;
+    font-weight: 600;
+    line-height: 1.25;
   }
 
   h4 {
-    @apply font-sans font-semibold text-gray-100 text-xl leading-tight;
+    color: rgb(243 244 246);
+    font-family: var(--font-inter), system-ui, sans-serif;
+    font-size: 1.25rem;
+    font-weight: 600;
+    line-height: 1.25;
+  }
+
+  @media (min-width: 640px) {
+    .bk-heading-hero,
+    h1 {
+      font-size: 3rem;
+    }
+  }
+
+  @media (min-width: 768px) {
+    .bk-heading-sub {
+      font-size: 1.875rem;
+    }
+
+    h2 {
+      font-size: 2.25rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .bk-heading-hero,
+    h1 {
+      font-size: 3.75rem;
+    }
+  }
+
+  @media (min-width: 1280px) {
+    .bk-heading-hero,
+    h1 {
+      font-size: 4.5rem;
+    }
   }
 }
 

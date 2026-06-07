@@ -63,7 +63,7 @@ export async function POST(req: NextRequest) {
   }
 
   const tagsList = Array.from(tags);
-  tagsList.forEach((tag) => revalidateTag(tag));
+  tagsList.forEach((tag) => revalidateTag(tag, 'max'));
 
   console.info('Revalidate request processed', { tags: tagsList });
 

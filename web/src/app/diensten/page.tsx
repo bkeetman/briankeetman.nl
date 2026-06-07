@@ -123,7 +123,7 @@ export default function ServicesPage() {
   return (
     <main className="min-h-screen bk-bg-gradient text-white">
       <section className="flex min-h-screen flex-col lg:flex-row">
-        <div className="relative min-h-[46vh] w-full flex-shrink-0 lg:min-h-screen lg:w-1/2">
+        <div className="relative w-full flex-shrink-0 overflow-hidden lg:w-1/2">
           <Image
             src="/background.webp"
             alt="Werkplek van Brian"
@@ -134,7 +134,7 @@ export default function ServicesPage() {
             quality={90}
           />
           <div className="absolute inset-0 bg-gradient-to-br from-brand-dark/90 via-brand-dark/68 to-brand-dark/35" />
-          <div className="absolute inset-0 flex flex-col justify-between p-8 lg:p-12">
+          <div className="relative z-10 flex min-h-[100svh] flex-col justify-between gap-10 p-8 pt-12 lg:min-h-screen lg:p-12">
             <FadeIn className="w-fit">
               <Link
                 href="/"
@@ -157,11 +157,18 @@ export default function ServicesPage() {
                 bedrijven die een praktische digitale oplossing nodig hebben.
                 Van eerste idee tot werkend product.
               </p>
-              <div className="mt-7 flex flex-wrap gap-3">
-                <ShimmerLink href="mailto:info@briankeetman.nl">
+              <div className="mt-7 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+                <ShimmerLink
+                  href="mailto:info@briankeetman.nl"
+                  className="justify-center sm:justify-start"
+                >
                   Plan een kennismaking
                 </ShimmerLink>
-                <ShimmerLink href="#portfolio" pulse={false}>
+                <ShimmerLink
+                  href="#portfolio"
+                  pulse={false}
+                  className="justify-center sm:justify-start"
+                >
                   Bekijk voorbeelden
                 </ShimmerLink>
               </div>
