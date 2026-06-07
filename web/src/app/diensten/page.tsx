@@ -86,13 +86,10 @@ const process = [
 
 const stack = [
   'Next.js',
-  'React',
-  'TypeScript',
-  'Tailwind CSS',
-  'Sanity CMS',
-  'Vercel',
-  'REST APIs',
-  'GraphQL',
+  'Moderne webapplicaties',
+  'Maatwerk',
+  'Snelle hosting',
+  'Uitbreidbaar beheer',
 ];
 
 const portfolio = [
@@ -245,11 +242,12 @@ export default function ServicesPage() {
                   Stack
                 </p>
                 <h2 className="mt-3 bk-heading-sub text-4xl sm:text-5xl">
-                  Moderne techniek zonder overbodige ballast
+                  Moderne techniek, netjes opgebouwd
                 </h2>
                 <p className="mt-5 text-base leading-relaxed text-gray-300">
-                  Ik bouw bewust met een moderne stack: snel, onderhoudbaar en
-                  prettig om later op door te ontwikkelen.
+                  Ik bouw websites en webapplicaties met een moderne basis.
+                  Denk aan Next.js, snelle hosting en maatwerk dat later netjes
+                  uit te breiden is.
                 </p>
               </FadeIn>
 
