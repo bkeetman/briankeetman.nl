@@ -11,6 +11,7 @@ import {
   getPortfolioSlugs,
 } from '@/sanity/lib/content';
 import { urlFor } from '@/sanity/lib/image';
+import { pageMetadata } from '@/lib/seo';
 
 const ExternalLink = ({ className }: { className?: string }) => (
     <svg 
@@ -57,17 +58,18 @@ export async function generateMetadata({
     };
   }
 
-  return {
+  const image = item.mainImage
+    ? urlFor(item.mainImage).width(1200).height(630).fit('crop').url()
+    : null;
+
+  return pageMetadata({
     title: `${item.title} | Portfolio`,
     description: item.description,
-    openGraph: {
-      title: item.title,
-      description: item.description,
-      type: 'article',
-      publishedTime: item.date,
-      images: item.mainImage?.asset?.url ? [item.mainImage.asset.url] : [],
-    },
-  };
+    path: `/portfolio/${slug}`,
+    image,
+    type: 'article',
+    publishedTime: item.date,
+  });
 }
 
 export default async function PortfolioItemPage({ params }: PageProps) {

@@ -3,6 +3,7 @@ import Link from 'next/link';
 
 import { BackLink } from '@/components/back-link';
 import { FadeIn, MotionCard, ShimmerLink } from '@/components/motion/patterns';
+import { pageMetadata } from '@/lib/seo';
 
 const ArrowUpRight = ({ className }: { className?: string }) => (
   <svg
@@ -96,11 +97,12 @@ const portfolio = [
   },
 ];
 
-export const metadata = {
-  title: 'Diensten | Brian Keetman',
+export const metadata = pageMetadata({
+  title: 'Diensten',
   description:
     'Websites, webapplicaties en moderne digitale oplossingen voor bedrijven, gebouwd met Next.js, Vercel en een praktische full-stack aanpak.',
-};
+  path: '/diensten',
+});
 
 export default function ServicesPage() {
   return (

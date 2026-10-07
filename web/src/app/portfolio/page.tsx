@@ -6,12 +6,14 @@ import { ShowcaseCard } from '@/components/showcase-card';
 import { formatPortfolioDate } from '@/lib/date';
 import { getPortfolioItems } from '@/sanity/lib/content';
 import { urlFor } from '@/sanity/lib/image';
+import { pageMetadata } from '@/lib/seo';
 
-export const metadata = {
-  title: 'Portfolio | Brian Keetman',
+export const metadata = pageMetadata({
+  title: 'Portfolio',
   description:
     'Een selectie van recente projecten, producten en samenwerkingen.',
-};
+  path: '/portfolio',
+});
 
 export default async function PortfolioIndex() {
   const items = await getPortfolioItems();

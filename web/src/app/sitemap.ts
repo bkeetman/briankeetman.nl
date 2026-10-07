@@ -1,14 +1,13 @@
 import type { MetadataRoute } from 'next';
 
+import { siteUrl } from '@/lib/seo';
 import {
   getPortfolioSlugs,
   getPostSlugs,
   getProjectSlugs,
 } from '@/sanity/lib/content';
 
-const siteUrl = 'https://www.briankeetman.nl';
-
-const staticRoutes = ['', '/blog', '/portfolio', '/projects'].map((path) => ({
+const staticRoutes = ['', '/diensten', '/blog', '/portfolio', '/projects'].map((path) => ({
   url: `${siteUrl}${path}`,
   lastModified: new Date(),
   changeFrequency: 'weekly' as const,

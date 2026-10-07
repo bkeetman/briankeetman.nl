@@ -19,7 +19,7 @@ const themes: Record<string, ProjectTheme> = {
     textMuted: '#a3a3a3',
     logo: '/projects/dingetje-icon.png',
     logoAlt: 'Dingetje logo',
-    preview: '/projects/dingetje-preview.webp',
+    preview: '/projects/dingetje-preview.jpg',
   },
   folio: {
     accent: '#ea580c',

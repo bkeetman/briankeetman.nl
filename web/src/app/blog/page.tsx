@@ -10,12 +10,14 @@ import { VisualEditingClient } from '@/components/visual-editing-client';
 import { formatPostDate } from '@/lib/date';
 import { getPosts } from '@/sanity/lib/content';
 import { urlFor } from '@/sanity/lib/image';
+import { pageMetadata } from '@/lib/seo';
 
-export const metadata = {
-  title: 'Blog | Brian Keetman',
+export const metadata = pageMetadata({
+  title: 'Blog',
   description:
     'Recente artikelen over full-stack development, infra en digitale producten.',
-};
+  path: '/blog',
+});
 
 export default async function BlogIndex() {
   const posts = await getPosts();

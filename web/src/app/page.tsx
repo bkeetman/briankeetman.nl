@@ -3,6 +3,10 @@ import type { SVGProps } from 'react';
 import Logo from '../../public/logo-briankeetman-nl.svg';
 import { FadeIn, ShimmerLink } from '@/components/motion/patterns';
 
+export const metadata = {
+  alternates: { canonical: '/' },
+};
+
 function LinkedInIcon(props: SVGProps<SVGSVGElement>) {
   return (
     <svg

@@ -10,6 +10,7 @@ import {
   getPostSlugs,
 } from '@/sanity/lib/content';
 import { urlFor } from '@/sanity/lib/image';
+import { pageMetadata } from '@/lib/seo';
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -34,17 +35,18 @@ export async function generateMetadata({
     };
   }
 
-  return {
+  const image = post.mainImage
+    ? urlFor(post.mainImage).width(1200).height(630).fit('crop').url()
+    : null;
+
+  return pageMetadata({
     title: post.title,
     description: post.description,
-    openGraph: {
-      title: post.title,
-      description: post.description,
-      type: 'article',
-      publishedTime: post.publishedAt,
-      images: post.mainImage?.asset?.url ? [post.mainImage.asset.url] : [],
-    },
-  };
+    path: `/blog/${slug}`,
+    image,
+    type: 'article',
+    publishedTime: post.publishedAt,
+  });
 }
 
 export default async function BlogPost({ params }: PageProps) {

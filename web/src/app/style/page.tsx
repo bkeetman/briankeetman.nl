@@ -1,5 +1,10 @@
 import AnimationDemos from './animation-demos';
 
+export const metadata = {
+  title: 'Style guide',
+  robots: { index: false, follow: false },
+};
+
 export default function StyleGuide() {
   return (
     <div className="min-h-screen text-white font-sans bk-bg-gradient">

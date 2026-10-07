@@ -6,6 +6,7 @@ import { ShowcaseCard } from '@/components/showcase-card';
 import { getProjectTheme } from '@/lib/projectThemes';
 import { getProjects } from '@/sanity/lib/content';
 import { urlFor } from '@/sanity/lib/image';
+import { pageMetadata } from '@/lib/seo';
 
 const statusLabel = (status?: string) => {
   switch (status) {
@@ -22,11 +23,12 @@ const statusLabel = (status?: string) => {
   }
 };
 
-export const metadata = {
-  title: 'Projecten | Brian Keetman',
+export const metadata = pageMetadata({
+  title: 'Projecten',
   description:
     'Projecten, tools en digitale producten in ontwikkeling.',
-};
+  path: '/projects',
+});
 
 export default async function ProjectsIndex() {
   const items = await getProjects();
@@ -40,7 +42,7 @@ export default async function ProjectsIndex() {
           imageAlt="Brian met robot"
           eyebrow="Projecten"
           title="Projecten In Ontwikkeling"
-          intro="Tools, experimenten en digitale producten waar ik actief aan werk. Kort, concreet en met ruimte voor updates."
+          intro="Tools, experimenten en digitale producten waar ik actief aan werk — van eerste idee tot live product."
         />
 
         {/* List */}

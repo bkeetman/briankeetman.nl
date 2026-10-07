@@ -15,6 +15,7 @@ import {
   getProjectSlugs,
 } from '@/sanity/lib/content';
 import { urlFor } from '@/sanity/lib/image';
+import { pageMetadata } from '@/lib/seo';
 
 const ExternalLink = ({ className }: { className?: string }) => (
   <svg
@@ -76,17 +77,21 @@ export async function generateMetadata({
     };
   }
 
-  return {
+  const theme = getProjectTheme(slug);
+  const image = theme.preview
+    ? theme.preview
+    : item.mainImage
+    ? urlFor(item.mainImage).width(1200).height(630).fit('crop').url()
+    : null;
+
+  return pageMetadata({
     title: `${item.title} | Projecten`,
     description: item.description,
-    openGraph: {
-      title: item.title,
-      description: item.description,
-      type: 'article',
-      publishedTime: item.startedAt,
-      images: item.mainImage?.asset?.url ? [item.mainImage.asset.url] : [],
-    },
-  };
+    path: `/projects/${slug}`,
+    image,
+    type: 'article',
+    publishedTime: item.startedAt,
+  });
 }
 
 export default async function ProjectPage({ params }: PageProps) {
