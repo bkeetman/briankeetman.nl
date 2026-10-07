@@ -95,6 +95,15 @@ const portfolio = [
     image: '/portfolio/client-sites/made-by-my-brother.jpg',
     technologies: ['Website', 'Producten', 'Contact'],
   },
+  {
+    title: 'Level Developments',
+    label: 'Website',
+    description:
+      'Een strakke projectwebsite voor een ontwikkelaar van duurzame huisvesting voor arbeidsmigranten, met projecten en nieuws die het team zelf beheert in Sanity.',
+    href: 'https://www.leveldevelopments.nl/',
+    image: '/portfolio/client-sites/level-developments.jpg',
+    technologies: ['Next.js', 'Sanity', 'Vercel'],
+  },
 ];
 
 export const metadata = pageMetadata({
