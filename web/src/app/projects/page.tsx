@@ -38,9 +38,8 @@ export default async function ProjectsIndex() {
       <BackLink href="/" label="Home" />
       <div className="flex flex-col lg:flex-row min-h-screen">
         <IndexHero
-          image="/background-ufo-sunset.webp"
+          image="/background-ufo-valley.webp"
           imageAlt="Brian kijkt naar een ufo bij zonsondergang"
-          imageClassName="object-[40%_50%]"
           eyebrow="Projecten"
           title="Projecten In Ontwikkeling"
           intro="Tools, experimenten en digitale producten waar ik actief aan werk — van eerste idee tot live product."

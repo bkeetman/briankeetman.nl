@@ -8,26 +8,17 @@ type IndexHeroProps = {
   eyebrow: string;
   title: string;
   intro: string;
-  /** Extra classes for the image, e.g. an object-position for landscape photos. */
-  imageClassName?: string;
 };
 
 /** Left-hand hero for the overview pages (blog, portfolio, projecten). */
-export function IndexHero({
-  image,
-  imageAlt,
-  eyebrow,
-  title,
-  intro,
-  imageClassName = '',
-}: IndexHeroProps) {
+export function IndexHero({ image, imageAlt, eyebrow, title, intro }: IndexHeroProps) {
   return (
     <div className="relative w-full flex-shrink-0 overflow-hidden lg:sticky lg:top-0 lg:h-screen lg:w-1/2">
       <Image
         src={image}
         alt={imageAlt}
         fill
-        className={`object-cover ${imageClassName}`}
+        className="object-cover"
         sizes="(max-width: 1024px) 100vw, 50vw"
         priority
       />

@@ -137,7 +137,7 @@ export default async function ProjectPage({ params }: PageProps) {
           ) : (
             <div className="w-full h-full relative">
               <Image
-                src="/background-ufo-sunset.webp"
+                src="/background-ufo-valley.webp"
                 alt={item.title}
                 fill
                 className="object-cover"
