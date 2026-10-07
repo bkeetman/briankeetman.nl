@@ -6,6 +6,8 @@ export type ProjectTheme = {
   textMuted: string;
   logo?: string;
   logoAlt?: string;
+  /** Local screenshot that overrides the Sanity mainImage as preview. */
+  preview?: string;
 };
 
 const themes: Record<string, ProjectTheme> = {
@@ -15,8 +17,9 @@ const themes: Record<string, ProjectTheme> = {
     cardBg: '#1a0d26',
     fontFamily: 'var(--font-geist-sans), system-ui, sans-serif',
     textMuted: '#a3a3a3',
-    logo: '/projects/dingetje-logo.png',
+    logo: '/projects/dingetje-icon.png',
     logoAlt: 'Dingetje logo',
+    preview: '/projects/dingetje-preview.webp',
   },
   folio: {
     accent: '#ea580c',

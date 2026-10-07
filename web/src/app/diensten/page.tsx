@@ -1,25 +1,8 @@
 import Image from 'next/image';
 import Link from 'next/link';
 
+import { BackLink } from '@/components/back-link';
 import { FadeIn, MotionCard, ShimmerLink } from '@/components/motion/patterns';
-
-const ArrowLeft = ({ className }: { className?: string }) => (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    width="16"
-    height="16"
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="currentColor"
-    strokeWidth="2"
-    strokeLinecap="round"
-    strokeLinejoin="round"
-    className={className}
-  >
-    <path d="m12 19-7-7 7-7" />
-    <path d="M19 12H5" />
-  </svg>
-);
 
 const ArrowUpRight = ({ className }: { className?: string }) => (
   <svg
@@ -122,6 +105,7 @@ export const metadata = {
 export default function ServicesPage() {
   return (
     <main className="min-h-screen bk-bg-gradient text-white">
+      <BackLink href="/" label="Home" />
       <section className="flex min-h-screen flex-col lg:flex-row">
         <div className="relative w-full flex-shrink-0 overflow-hidden lg:w-1/2">
           <Image
@@ -134,17 +118,7 @@ export default function ServicesPage() {
             quality={90}
           />
           <div className="absolute inset-0 bg-gradient-to-br from-brand-dark/90 via-brand-dark/68 to-brand-dark/35" />
-          <div className="relative z-10 flex min-h-[100svh] flex-col justify-between gap-10 p-8 pt-12 lg:min-h-screen lg:p-12">
-            <FadeIn className="w-fit">
-              <Link
-                href="/"
-                className="inline-flex items-center gap-2 text-sm font-medium uppercase tracking-wide text-gray-200 transition-colors hover:text-white"
-              >
-                <ArrowLeft className="h-4 w-4" />
-                Terug naar home
-              </Link>
-            </FadeIn>
-
+          <div className="relative z-10 flex min-h-[100svh] flex-col justify-end gap-10 p-8 pt-24 lg:min-h-screen lg:p-12">
             <FadeIn delay={0.08} className="max-w-xl">
               <p className="mb-3 text-xs uppercase tracking-[0.35em] text-white/70">
                 Diensten

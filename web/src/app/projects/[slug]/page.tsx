@@ -1,13 +1,13 @@
 import type React from 'react';
 import type { Metadata } from 'next';
 import Image from 'next/image';
-import Link from 'next/link';
 import { notFound } from 'next/navigation';
 
 import { stegaClean } from '@sanity/client/stega';
 
+import { BackLink } from '@/components/back-link';
+import { ShowcaseHero } from '@/components/showcase-hero';
 import { SanityPortableText } from '@/components/portable-text';
-import { Button } from '@/components/ui/button';
 import { formatProjectDate } from '@/lib/date';
 import { getProjectTheme } from '@/lib/projectThemes';
 import {
@@ -15,24 +15,6 @@ import {
   getProjectSlugs,
 } from '@/sanity/lib/content';
 import { urlFor } from '@/sanity/lib/image';
-
-const ArrowLeft = ({ className }: { className?: string }) => (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    width="16"
-    height="16"
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="currentColor"
-    strokeWidth="2"
-    strokeLinecap="round"
-    strokeLinejoin="round"
-    className={className}
-  >
-    <path d="m12 19-7-7 7-7" />
-    <path d="M19 12H5" />
-  </svg>
-);
 
 const ExternalLink = ({ className }: { className?: string }) => (
   <svg
@@ -117,10 +99,15 @@ export default async function ProjectPage({ params }: PageProps) {
 
   const theme = getProjectTheme(stegaClean(item.slug));
 
-  const heroImage = item.mainImage
-    ? urlFor(item.mainImage).width(1600).height(1600).fit('max').url()
+  const heroImage = theme.preview
+    ? theme.preview
+    : item.mainImage
+    ? urlFor(item.mainImage).width(1600).fit('max').url()
     : null;
-  const heroLqip = item.mainImage?.asset?.metadata?.lqip;
+  const heroSize = theme.preview ? undefined : item.mainImage?.asset?.metadata?.dimensions;
+  const heroLqip = theme.preview
+    ? undefined
+    : item.mainImage?.asset?.metadata?.lqip;
   const status = statusLabel(item.status);
   const dateLabel = item.startedAt
     ? formatProjectDate(item.startedAt)
@@ -128,33 +115,19 @@ export default async function ProjectPage({ params }: PageProps) {
 
   return (
     <div className="min-h-screen bk-bg-gradient">
-      {/* Mobile: Back button */}
-      <div className="lg:hidden px-4 pt-6 pb-4">
-        <Button
-          asChild
-          variant="ghost"
-          className="text-gray-400 hover:text-white"
-        >
-          <Link href="/projects" className="flex items-center gap-2">
-            <ArrowLeft className="h-4 w-4" />
-            <span>Terug naar overzicht</span>
-          </Link>
-        </Button>
-      </div>
+      <BackLink href="/projects" label="Projecten" />
 
       <div className="flex flex-col lg:flex-row min-h-screen">
         {/* Linker helft: Image (sticky op desktop) */}
         <div className="w-full lg:w-1/2 h-[40vh] lg:h-screen relative lg:sticky lg:top-0 flex-shrink-0 bg-brand-dark">
           {heroImage ? (
-            <Image
-              src={heroImage}
+            <ShowcaseHero
+              image={heroImage}
               alt={item.mainImage?.alt || item.title}
-              fill
-              className="object-contain"
-              sizes="(max-width: 1024px) 100vw, 50vw"
-              priority
-              placeholder={heroLqip ? 'blur' : 'empty'}
               blurDataURL={heroLqip}
+              width={heroSize?.width}
+              height={heroSize?.height}
+              accent={theme.accent}
             />
           ) : (
             <div className="w-full h-full relative">
@@ -190,20 +163,6 @@ export default async function ProjectPage({ params }: PageProps) {
         >
           <div className="px-6 sm:px-8 lg:px-20 xl:px-24 py-12 sm:py-16 lg:py-20 xl:py-24">
             <div className="max-w-2xl mx-auto">
-              {/* Desktop: Back button */}
-              <div className="hidden lg:block mb-12">
-                <Button
-                  asChild
-                  variant="ghost"
-                  className="text-gray-400 hover:text-white -ml-2"
-                >
-                  <Link href="/projects" className="flex items-center gap-2">
-                    <ArrowLeft className="h-4 w-4" />
-                    <span>Terug naar overzicht</span>
-                  </Link>
-                </Button>
-              </div>
-
               <article>
                 {/* Header */}
                 <header className="mb-12 lg:mb-16">

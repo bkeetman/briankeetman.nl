@@ -3,29 +3,13 @@ import { draftMode } from 'next/headers';
 import Image from 'next/image';
 import Link from 'next/link';
 
-import { FadeIn, MotionCard } from '@/components/motion/patterns';
+import { BackLink } from '@/components/back-link';
+import { IndexHero } from '@/components/index-hero';
+import { MotionCard } from '@/components/motion/patterns';
 import { VisualEditingClient } from '@/components/visual-editing-client';
 import { formatPostDate } from '@/lib/date';
 import { getPosts } from '@/sanity/lib/content';
 import { urlFor } from '@/sanity/lib/image';
-
-const ArrowLeft = ({ className }: { className?: string }) => (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    width="16"
-    height="16"
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="currentColor"
-    strokeWidth="2"
-    strokeLinecap="round"
-    strokeLinejoin="round"
-    className={className}
-  >
-    <path d="m12 19-7-7 7-7" />
-    <path d="M19 12H5" />
-  </svg>
-);
 
 export const metadata = {
   title: 'Blog | Brian Keetman',
@@ -39,46 +23,18 @@ export default async function BlogIndex() {
 
   return (
     <div className="min-h-screen bk-bg-gradient">
+      <BackLink href="/" label="Home" />
       <div className="flex flex-col lg:flex-row min-h-screen">
-        {/* Hero */}
-        <div className="relative w-full lg:w-1/2 h-[40vh] lg:h-screen flex-shrink-0">
-          <Image
-            src="/background.webp"
-            alt="Brian Keetman"
-            fill
-            className="object-cover"
-            sizes="(max-width: 1024px) 100vw, 50vw"
-            priority
-          />
-          <div className="absolute inset-0 bg-gradient-to-br from-brand-dark-light/80 via-brand-dark-light/60 to-brand-dark-light/30" />
-          <div className="absolute inset-0 flex flex-col justify-end p-8 lg:p-12 gap-6">
-            <FadeIn className="w-fit">
-              <Link
-                href="/"
-                className="inline-flex items-center gap-2 text-gray-200 hover:text-white text-sm font-medium uppercase tracking-wide transition-colors"
-              >
-                <ArrowLeft className="h-4 w-4" />
-                Terug naar home
-              </Link>
-            </FadeIn>
-            <FadeIn delay={0.08}>
-              <div>
-                <p className="text-xs uppercase tracking-[0.4em] text-white/70 mb-4">
-                  Blog
-                </p>
-                <h1 className="bk-heading-hero leading-[1.05]">Lesjes uit de werkplaats</h1>
-                <p className="mt-6 max-w-lg text-base sm:text-lg text-gray-200 leading-relaxed">
-                  Tech, product en ondernemerschap. Geen fluff, wél praktijk. Dit
-                  is waar ik opschrijf hoe ik dingen bouw, automatiseer en
-                  optimaliseer.
-                </p>
-              </div>
-            </FadeIn>
-          </div>
-        </div>
+        <IndexHero
+          image="/background.webp"
+          imageAlt="Brian Keetman"
+          eyebrow="Blog"
+          title="Lesjes uit de werkplaats"
+          intro="Tech, product en ondernemerschap. Geen fluff, wél praktijk. Dit is waar ik opschrijf hoe ik dingen bouw, automatiseer en optimaliseer."
+        />
 
         {/* List */}
-        <div className="w-full lg:w-1/2 bg-transparent flex-shrink-0 overflow-y-auto">
+        <div className="w-full lg:w-1/2 flex-shrink-0">
           <div className="px-6 sm:px-8 lg:px-20 xl:px-24 py-12 sm:py-16 lg:py-20 xl:py-24">
             <div className="max-w-2xl mx-auto space-y-8">
               {posts.length === 0 ? (
