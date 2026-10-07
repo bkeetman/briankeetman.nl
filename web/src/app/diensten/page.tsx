@@ -120,15 +120,15 @@ export default function ServicesPage() {
       <section className="flex min-h-screen flex-col lg:flex-row">
         <div className="relative w-full flex-shrink-0 overflow-hidden lg:w-1/2">
           <Image
-            src="/background.webp"
-            alt="Werkplek van Brian"
+            src="/background-sunset.webp"
+            alt="Brian met robot bij zonsondergang"
             fill
-            className="object-cover"
+            className="object-cover object-[30%_50%]"
             sizes="(max-width: 1024px) 100vw, 50vw"
             priority
             quality={90}
           />
-          <div className="absolute inset-0 bg-gradient-to-br from-brand-dark/90 via-brand-dark/68 to-brand-dark/35" />
+          <div className="absolute inset-0 bg-gradient-to-t from-brand-dark/95 via-brand-dark/55 to-brand-dark/10" />
           <div className="relative z-10 flex min-h-[100svh] flex-col justify-end gap-10 p-8 pt-24 lg:min-h-screen lg:p-12">
             <FadeIn delay={0.08} className="max-w-xl">
               <p className="mb-3 text-xs uppercase tracking-[0.35em] text-white/70">
