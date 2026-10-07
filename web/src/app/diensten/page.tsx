@@ -109,7 +109,7 @@ const portfolio = [
 export const metadata = pageMetadata({
   title: 'Diensten',
   description:
-    'Websites, webapplicaties en moderne digitale oplossingen voor bedrijven, gebouwd met Next.js, Vercel en een praktische full-stack aanpak.',
+    'Websites, webapplicaties en moderne digitale oplossingen voor bedrijven. Van eerste gesprek tot werkend product, met een praktische full-stack aanpak.',
   path: '/diensten',
 });
 

@@ -3,7 +3,7 @@ import type { Metadata } from 'next';
 export const siteUrl = 'https://www.briankeetman.nl';
 export const siteName = 'Brian Keetman';
 export const siteDescription =
-  'Full-stack developer & builder uit Tollebeek. Websites, webapplicaties en digitale producten, gebouwd met Next.js en een praktische aanpak.';
+  'Full-stack developer & builder uit Tollebeek. Ik ontwerp en bouw websites, webapplicaties en digitale producten, met een praktische aanpak van idee tot livegang.';
 
 type PageMetadataInput = {
   title: string;
