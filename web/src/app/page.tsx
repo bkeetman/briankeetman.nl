@@ -88,8 +88,8 @@ export default function Home() {
       {/* Image section - full width on mobile, half on desktop */}
       <div className="w-full md:w-1/2 relative min-h-[50vh] md:min-h-screen">
         <Image
-          src="/background-ufo.webp"
-          alt="Brian met robot"
+          src="/background-ufo-forest.webp"
+          alt="Brian onder een ufo in het bos"
           fill
           className="object-cover"
           sizes="(max-width: 768px) 100vw, 50vw"
