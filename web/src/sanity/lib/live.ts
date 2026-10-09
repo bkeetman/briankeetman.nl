@@ -8,7 +8,7 @@ type SanityFetchOptions<TQuery extends string> = {
   query: TQuery;
   params?: QueryParams;
   /**
-   * Default: 60s. Use false to opt out of Next.js caching.
+   * Default: 60s. false keeps the cache until tag-based revalidation.
    */
   revalidate?: number | false;
   /**
@@ -27,6 +27,14 @@ export async function sanityFetch<TResult>({
   stega = true,
   perspective = 'published',
 }: SanityFetchOptions<string>) {
+  if (process.env.SITEHOME_TEST_PREVIEW === 'true') {
+    return client.fetch<TResult>(query, params, {
+      perspective: 'published',
+      stega: false,
+      cache: 'no-store',
+    });
+  }
+
   return client.fetch<TResult>(query, params, {
     perspective,
     stega,
