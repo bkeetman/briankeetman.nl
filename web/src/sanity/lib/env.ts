@@ -14,6 +14,6 @@ export const useCdn = process.env.SANITY_USE_CDN !== 'false';
 
 // SiteHome preview must never fall back to production.
 if (process.env.SITEHOME_TEST_PREVIEW === 'true' &&
-    (projectId !== 'fzn0qzqj' || dataset !== 'sitehome-test')) {
-  throw new Error('SiteHome preview requires fzn0qzqj/sitehome-test');
+    (projectId !== (process.env.SITEHOME_ISOLATED_PREVIEW === 'true' ? 'ek05qcgq' : 'fzn0qzqj') || dataset !== 'sitehome-test')) {
+  throw new Error('SiteHome preview requires its explicit test project and sitehome-test');
 }

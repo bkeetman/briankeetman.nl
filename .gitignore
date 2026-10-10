@@ -12,6 +12,7 @@
 
 # next.js
 /web/.next
+/web/.next-sitehome-isolated
 .next
 /out/
 
