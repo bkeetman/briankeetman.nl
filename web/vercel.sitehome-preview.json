@@ -1,5 +1,6 @@
 {
   "buildCommand": "node scripts/sitehome-preview-build.mjs",
   "installCommand": "npm ci",
+  "outputDirectory": ".next-sitehome-isolated",
   "framework": "nextjs"
 }
