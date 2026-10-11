@@ -1,5 +1,6 @@
 import { revalidateTag } from 'next/cache';
 import { NextRequest, NextResponse } from 'next/server';
+import { isSiteHomePreview } from '@/lib/sitehome-preview';
 
 type RevalidateBody = {
   type?: 'post' | 'portfolio' | 'project' | string;
@@ -7,6 +8,7 @@ type RevalidateBody = {
 };
 
 export async function POST(req: NextRequest) {
+  if (isSiteHomePreview) return NextResponse.json({ ok: false }, { status: 404 });
   const secretHeaderName = 'x-sanity-secret';
   const secret = process.env.SANITY_REVALIDATE_SECRET;
   if (!secret) {

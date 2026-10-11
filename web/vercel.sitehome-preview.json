@@ -1,0 +1,5 @@
+{
+  "buildCommand": "node scripts/sitehome-preview-build.mjs",
+  "installCommand": "npm ci",
+  "framework": "nextjs"
+}

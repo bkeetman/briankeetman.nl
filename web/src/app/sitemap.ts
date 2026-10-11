@@ -1,6 +1,7 @@
 import type { MetadataRoute } from 'next';
 
 import { siteUrl } from '@/lib/seo';
+import { isSiteHomePreview } from '@/lib/sitehome-preview';
 import {
   getPortfolioSlugs,
   getPostSlugs,
@@ -15,6 +16,7 @@ const staticRoutes = ['', '/diensten', '/blog', '/portfolio', '/projects'].map((
 }));
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  if (isSiteHomePreview) return [];
   const [posts, portfolioItems, projects] = await Promise.all([
     getPostSlugs(),
     getPortfolioSlugs(),

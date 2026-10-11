@@ -1,6 +1,9 @@
 import type { Metadata } from 'next';
+import { isSiteHomePreview } from './sitehome-preview';
 
-export const siteUrl = 'https://www.briankeetman.nl';
+export const siteUrl = isSiteHomePreview
+  ? process.env.SITEHOME_PREVIEW_URL || 'http://localhost:3101'
+  : 'https://www.briankeetman.nl';
 export const siteName = 'Brian Keetman';
 export const siteDescription =
   'Full-stack developer & builder uit Tollebeek. Ik ontwerp en bouw websites, webapplicaties en digitale producten, met een praktische aanpak van idee tot livegang.';
@@ -30,6 +33,7 @@ export function pageMetadata({
   return {
     title,
     description,
+    ...(isSiteHomePreview ? { robots: { index: false, follow: false } } : {}),
     alternates: { canonical: path },
     openGraph: {
       title,
