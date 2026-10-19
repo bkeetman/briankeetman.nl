@@ -30,6 +30,16 @@ const themes: Record<string, ProjectTheme> = {
     logo: '/projects/folio-logo.png',
     logoAlt: 'Folio logo',
   },
+  sitehome: {
+    accent: '#fafafa',
+    accentMuted: 'rgba(250,250,250,0.10)',
+    cardBg: '#171717',
+    fontFamily: 'var(--font-inter), system-ui, sans-serif',
+    textMuted: '#aaaaaa',
+    logo: '/projects/sitehome-logo.png',
+    logoAlt: 'SiteHome logo',
+    preview: '/projects/sitehome-preview.jpg',
+  },
 };
 
 const fallback: ProjectTheme = {
