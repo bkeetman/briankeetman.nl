@@ -1,0 +1,61 @@
+{
+  "_id": "project-sitehome",
+  "_type": "project",
+  "title": "SiteHome",
+  "slug": { "_type": "slug", "current": "sitehome" },
+  "description": "Een mobiele app waarmee je je website bijwerkt vanaf je telefoon. SiteHome koppelt met het CMS dat je website al gebruikt: je past teksten, foto's en lijsten aan, ziet precies wat er verandert en publiceert pas als jij dat zegt. Nu in bèta via TestFlight.",
+  "status": "beta",
+  "startedAt": "2026-10-09",
+  "technologies": ["Expo", "React Native", "TypeScript", "Convex", "Sanity", "WordPress", "Payload"],
+  "website": "https://getsitehome.com",
+  "body": [
+    {
+      "_type": "block", "_key": "b01", "style": "normal", "markDefs": [],
+      "children": [{ "_type": "span", "_key": "s01", "marks": [], "text": "Een website bijwerken betekent meestal: laptop open, inloggen in een CMS en zoeken waar dat ene veld ook alweer zat. SiteHome maakt daar een rustige app van. Je opent je website op je telefoon, past aan wat er moet veranderen en publiceert wanneer jij er klaar voor bent." }]
+    },
+    {
+      "_type": "block", "_key": "b02", "style": "h2", "markDefs": [],
+      "children": [{ "_type": "span", "_key": "s02", "marks": [], "text": "Status: bèta" }]
+    },
+    {
+      "_type": "block", "_key": "b03", "style": "normal", "markDefs": [],
+      "children": [{ "_type": "span", "_key": "s03", "marks": [], "text": "SiteHome is in de eerste plaats een mobiele app voor iOS en Android. De app zit nu in bèta en wordt getest via TestFlight. Dezelfde app werkt ook als webapp in de browser. De website getsitehome.com staat live, met documentatie en een inschrijflijst voor wie wil horen wanneer SiteHome er is." }]
+    },
+    {
+      "_type": "block", "_key": "b04", "style": "h2", "markDefs": [],
+      "children": [{ "_type": "span", "_key": "s04", "marks": [], "text": "Wat het kan" }]
+    },
+    {
+      "_type": "block", "_key": "b05", "style": "normal", "listItem": "bullet", "level": 1, "markDefs": [],
+      "children": [{ "_type": "span", "_key": "s05", "marks": [], "text": "Koppelen met Sanity, WordPress en Payload. SiteHome leest de contentsoorten en regels die je website al kent." }]
+    },
+    {
+      "_type": "block", "_key": "b06", "style": "normal", "listItem": "bullet", "level": 1, "markDefs": [],
+      "children": [{ "_type": "span", "_key": "s06", "marks": [], "text": "Titels, lange tekst, afbeeldingen, datums, lijsten en menu's bewerken in velden gemaakt voor je duim." }]
+    },
+    {
+      "_type": "block", "_key": "b07", "style": "normal", "listItem": "bullet", "level": 1, "markDefs": [],
+      "children": [{ "_type": "span", "_key": "s07", "marks": [], "text": "Elke wijziging zien als bijgehouden wijzigingen, woord voor woord, voordat er iets live gaat." }]
+    },
+    {
+      "_type": "block", "_key": "b08", "style": "normal", "listItem": "bullet", "level": 1, "markDefs": [],
+      "children": [{ "_type": "span", "_key": "s08", "marks": [], "text": "Gewoon zeggen of typen wat er moet veranderen: de AI-assistent maakt er een voorstel van dat je eerst controleert." }]
+    },
+    {
+      "_type": "block", "_key": "b09", "style": "normal", "listItem": "bullet", "level": 1, "markDefs": [],
+      "children": [{ "_type": "span", "_key": "s09", "marks": [], "text": "Nieuwe pagina's, blogposts en projecten aanmaken, rechtstreeks vanaf je telefoon." }]
+    },
+    {
+      "_type": "block", "_key": "b10", "style": "normal", "listItem": "bullet", "level": 1, "markDefs": [],
+      "children": [{ "_type": "span", "_key": "s10", "marks": [], "text": "Redacteuren en meelezers uitnodigen, en voor bureaus één plek voor alle websites van hun klanten." }]
+    },
+    {
+      "_type": "block", "_key": "b11", "style": "h2", "markDefs": [],
+      "children": [{ "_type": "span", "_key": "s11", "marks": [], "text": "Waar we nu aan werken" }]
+    },
+    {
+      "_type": "block", "_key": "b12", "style": "normal", "markDefs": [],
+      "children": [{ "_type": "span", "_key": "s12", "marks": [], "text": "De WordPress-plugin ligt ter beoordeling bij WordPress.org. Ondertussen testen we de app op echte websites en telefoons, in het Nederlands en het Engels, op weg naar de App Store en Google Play." }]
+    }
+  ]
+}
