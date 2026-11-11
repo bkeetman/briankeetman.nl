@@ -3,15 +3,16 @@ import Image from 'next/image';
 type ProjectAppHeroProps = {
   screenshots: { src: string; alt: string }[];
   accent: string;
+  background?: string;
 };
 
-export function ProjectAppHero({ screenshots, accent }: ProjectAppHeroProps) {
+export function ProjectAppHero({ screenshots, accent, background = '#1c3053' }: ProjectAppHeroProps) {
   return (
     <div className="absolute inset-0 overflow-hidden bg-brand-dark">
       <div
         className="absolute inset-0"
         style={{
-          background: `radial-gradient(ellipse at 50% 45%, color-mix(in srgb, ${accent} 16%, transparent), transparent 70%), linear-gradient(145deg, #1c3053, #101827)`,
+          background: `radial-gradient(ellipse at 50% 45%, color-mix(in srgb, ${accent} 16%, transparent), transparent 70%), linear-gradient(145deg, ${background}, #101827)`,
         }}
       />
       <div className="absolute inset-0 flex items-center justify-center gap-3 px-5 pb-6 pt-16 sm:gap-5 sm:px-8 lg:gap-6 lg:px-10 lg:pb-12 lg:pt-24">

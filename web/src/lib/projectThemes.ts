@@ -9,6 +9,7 @@ export type ProjectTheme = {
   /** Local screenshot that overrides the Sanity mainImage as preview. */
   preview?: string;
   appScreenshots?: { src: string; alt: string }[];
+  appBackground?: string;
 };
 
 const themes: Record<string, ProjectTheme> = {
@@ -34,6 +35,11 @@ const themes: Record<string, ProjectTheme> = {
     logo: '/projects/dingetje-icon.png',
     logoAlt: 'Dingetje logo',
     preview: '/projects/dingetje-preview.jpg',
+    appBackground: '#240d3b',
+    appScreenshots: [
+      { src: '/projects/dingetje-app-maken.jpg', alt: 'Dingetje: een bijeenkomst maken met datum, locatie en optionele tickets' },
+      { src: '/projects/dingetje-app-uitnodiging.jpg', alt: 'Dingetje: uitnodiging voor een bijeenkomst met reacties van gasten' },
+    ],
   },
   folio: {
     accent: '#ea580c',

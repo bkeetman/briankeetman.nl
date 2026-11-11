@@ -127,7 +127,7 @@ export default async function ProjectPage({ params }: PageProps) {
         {/* Linker helft: Image (sticky op desktop) */}
         <div className={`w-full lg:w-1/2 ${theme.appScreenshots?.length ? 'h-[65vh] min-h-[380px] lg:min-h-0' : 'h-[40vh]'} lg:h-screen relative lg:sticky lg:top-0 flex-shrink-0 bg-brand-dark`}>
           {theme.appScreenshots?.length ? (
-            <ProjectAppHero screenshots={theme.appScreenshots} accent={theme.accent} />
+            <ProjectAppHero screenshots={theme.appScreenshots} accent={theme.accent} background={theme.appBackground} />
           ) : heroImage ? (
             <ShowcaseHero
               image={heroImage}
