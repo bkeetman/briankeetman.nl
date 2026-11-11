@@ -11,6 +11,15 @@ export type ProjectTheme = {
 };
 
 const themes: Record<string, ProjectTheme> = {
+  oddfellows: {
+    accent: '#d4b761',
+    accentMuted: 'rgba(212,183,97,0.15)',
+    cardBg: '#14233d',
+    fontFamily: 'var(--font-inter), system-ui, sans-serif',
+    textMuted: '#c4cfdf',
+    logo: '/projects/oddfellows-logo.png',
+    logoAlt: 'OddFellows.app logo met drie verbonden schakels',
+  },
   dingetje: {
     accent: '#7c3aed',
     accentMuted: 'rgba(124,58,237,0.15)',
