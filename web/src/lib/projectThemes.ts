@@ -8,6 +8,7 @@ export type ProjectTheme = {
   logoAlt?: string;
   /** Local screenshot that overrides the Sanity mainImage as preview. */
   preview?: string;
+  appScreenshots?: { src: string; alt: string }[];
 };
 
 const themes: Record<string, ProjectTheme> = {
@@ -19,6 +20,10 @@ const themes: Record<string, ProjectTheme> = {
     textMuted: '#c4cfdf',
     logo: '/projects/oddfellows-logo.png',
     logoAlt: 'OddFellows.app logo met drie verbonden schakels',
+    appScreenshots: [
+      { src: '/projects/oddfellows-app-start.jpg', alt: 'OddFellows.app: startscherm met lidkaart en komende activiteiten' },
+      { src: '/projects/oddfellows-app-agenda.jpg', alt: 'OddFellows.app: agenda met bijeenkomsten en activiteiten' },
+    ],
   },
   dingetje: {
     accent: '#7c3aed',

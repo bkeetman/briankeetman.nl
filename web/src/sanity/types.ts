@@ -49,6 +49,9 @@ export type Project = {
   startedAt?: string;
   technologies?: string[];
   website?: string;
+  appStoreUrl?: string;
+  googlePlayUrl?: string;
+  androidComingSoon?: boolean;
   mainImage?: SanityImageWithMetadata;
   body?: PortableTextBlock[];
 };

@@ -60,6 +60,21 @@ export const project = defineType({
       type: 'url',
     }),
     defineField({
+      name: 'appStoreUrl',
+      title: 'App Store',
+      type: 'url',
+    }),
+    defineField({
+      name: 'googlePlayUrl',
+      title: 'Google Play',
+      type: 'url',
+    }),
+    defineField({
+      name: 'androidComingSoon',
+      title: 'Android binnenkort beschikbaar',
+      type: 'boolean',
+    }),
+    defineField({
       name: 'mainImage',
       title: 'Afbeelding',
       type: 'image',

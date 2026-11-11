@@ -7,6 +7,7 @@ import { stegaClean } from '@sanity/client/stega';
 
 import { BackLink } from '@/components/back-link';
 import { ShowcaseHero } from '@/components/showcase-hero';
+import { ProjectAppHero } from '@/components/project-app-hero';
 import { SanityPortableText } from '@/components/portable-text';
 import { formatProjectDate } from '@/lib/date';
 import { getProjectTheme } from '@/lib/projectThemes';
@@ -124,8 +125,10 @@ export default async function ProjectPage({ params }: PageProps) {
 
       <div className="flex flex-col lg:flex-row min-h-screen">
         {/* Linker helft: Image (sticky op desktop) */}
-        <div className="w-full lg:w-1/2 h-[40vh] lg:h-screen relative lg:sticky lg:top-0 flex-shrink-0 bg-brand-dark">
-          {heroImage ? (
+        <div className={`w-full lg:w-1/2 ${theme.appScreenshots?.length ? 'h-[65vh] min-h-[380px] lg:min-h-0' : 'h-[40vh]'} lg:h-screen relative lg:sticky lg:top-0 flex-shrink-0 bg-brand-dark`}>
+          {theme.appScreenshots?.length ? (
+            <ProjectAppHero screenshots={theme.appScreenshots} accent={theme.accent} />
+          ) : heroImage ? (
             <ShowcaseHero
               image={heroImage}
               alt={item.mainImage?.alt || item.title}
@@ -225,9 +228,15 @@ export default async function ProjectPage({ params }: PageProps) {
                     ))}
                   </div>
 
-                  {item.website && (
+                  <div className="flex flex-wrap gap-3">
+                  {[
+                    { href: item.website, label: 'Bezoek project' },
+                    { href: item.appStoreUrl, label: 'App Store' },
+                    { href: item.googlePlayUrl, label: 'Google Play' },
+                  ].filter((link) => link.href).map((link) => (
                     <a
-                      href={item.website}
+                      key={link.label}
+                      href={link.href}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="inline-flex items-center gap-2 rounded-full border px-4 py-2 text-sm font-semibold uppercase tracking-[0.12em] transition"
@@ -237,9 +246,13 @@ export default async function ProjectPage({ params }: PageProps) {
                         color: theme.accent,
                       }}
                     >
-                      <span>Bezoek project</span>
+                      <span>{link.label}</span>
                       <ExternalLink className="h-4 w-4" />
                     </a>
+                  ))}
+                  </div>
+                  {item.androidComingSoon && !item.googlePlayUrl && (
+                    <p className="mt-4 text-sm text-gray-400">Android · Binnenkort in Google Play</p>
                   )}
                 </header>
 

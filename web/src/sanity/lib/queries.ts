@@ -111,6 +111,9 @@ export const PROJECT_QUERY = defineQuery(/* groq */ `
     startedAt,
     technologies,
     website,
+    appStoreUrl,
+    googlePlayUrl,
+    androidComingSoon,
     body,
     ${imageFields}
   }
